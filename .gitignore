@@ -4,6 +4,7 @@ __pycache__/
 *.pyc
 .idea
 db.sqlite3
+migrations
 
 # C extensions
 *.so
