@@ -1,4 +1,5 @@
 # from django.conf import settings
+from django.conf import settings
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext as _
@@ -13,9 +14,8 @@ class Developer(models.Model):
         for the first time.
     """
 
-    # TODO relation with Django users in order to implement authentication
-    # user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='django_user')
-    # supervisor = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='supervisor_of')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='django_user')
+    password = models.CharField(max_length=64, blank=False, null=False)
     githubuser = models.CharField(max_length=255, null=False, blank=False)
     level = models.IntegerField(null=True, blank=True, default=1)
     repos = models.IntegerField(null=True, blank=True)  # IDEA: You have X repositories in your inventory
@@ -31,12 +31,9 @@ class Developer(models.Model):
         return self.githubuser
 
 
-""" pre_save Signal """
-@receiver(pre_save, sender=Developer)
-def my_callback(sender, instance, *args, **kwargs):
+class Profile(models.Model):
+    """ Developer Game Profile
+        Each user has a "Gaming profile". It will collect information about
+        some skills so a
     """
-    This pre_save signal is sent before saving the data in the database.
-    We will collect repos (number of public repositories) and maxstreak
-    before saving the user in the Database
-    """
-    instance.title = _("Apprentice")
+    pass

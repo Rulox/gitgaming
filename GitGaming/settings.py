@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-SECRET_KEY = 'gitgaming'
+SECRET_KEY = 'gitgamingdeveloptmentkeyhaha'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,6 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'developers',
     'badges',
+    'easy_thumbnails',
+    'pygithub3',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -76,6 +78,8 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
