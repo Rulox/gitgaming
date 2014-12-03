@@ -5,6 +5,7 @@ __pycache__/
 .idea
 db.sqlite3
 migrations
+SECRET.py
 
 # C extensions
 *.so

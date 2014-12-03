@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-SECRET_KEY = 'gitgamingdeveloptmentkeyhaha'
+SECRET_KEY = 'gitgamingdevelopmentkeyhaha'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -23,6 +23,12 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
+
+""" Social Keys for AUTH """
+""" DEBUG ONLY """
+from SECRET import *
+SOCIAL_AUTH_GITHUB_KEY = GITHUB1
+SOCIAL_AUTH_GITHUB_SECRET = GITHUB2
 
 
 # Application definition
@@ -38,6 +44,7 @@ INSTALLED_APPS = (
     'badges',
     'easy_thumbnails',
     'pygithub3',
+    'social.apps.django_app.default',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,6 +62,10 @@ ROOT_URLCONF = 'GitGaming.urls'
 WSGI_APPLICATION = 'GitGaming.wsgi.application'
 
 
+AUTHENTICATION_BACKENDS = (
+    'social.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 # Database
 # SQLITE for develop
 
@@ -88,3 +99,31 @@ TEMPLATE_DIRS = (
 STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__), 'static'),
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+   'django.contrib.auth.context_processors.auth',
+   'django.core.context_processors.debug',
+   'django.core.context_processors.i18n',
+   'django.core.context_processors.media',
+   'django.core.context_processors.static',
+   'django.core.context_processors.tz',
+   'django.contrib.messages.context_processors.messages',
+   'social.apps.django_app.context_processors.backends',
+   'social.apps.django_app.context_processors.login_redirect',
+)
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'developers.models.save_user',  # <--- set the import-path to the function
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details'
+)
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+LOGIN_REDIRECT_URL = '/'

@@ -4,6 +4,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 from django.db import models
+from django.contrib.auth import get_user_model
 
 
 # Create your models here.
@@ -15,7 +16,6 @@ class Developer(models.Model):
     """
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='django_user')
-    password = models.CharField(max_length=64, blank=False, null=False)
     githubuser = models.CharField(max_length=255, null=False, blank=False)
     level = models.IntegerField(null=True, blank=True, default=1)
     repos = models.IntegerField(null=True, blank=True)  # IDEA: You have X repositories in your inventory
@@ -26,9 +26,9 @@ class Developer(models.Model):
     lastupdate = models.DateTimeField(auto_now=True)
     avatar = models.URLField(null=True, blank=True)
 
-
     def __unicode__(self):
         return self.githubuser
+
 
 
 class Profile(models.Model):
@@ -37,3 +37,22 @@ class Profile(models.Model):
         some skills so a
     """
     pass
+
+
+
+def save_user(backend, user, response, *args, **kwargs):
+    """
+        When an user Login with GitHub, we create a Developer instance
+        so we can have an associated Developer profile with that
+        authenticated user
+    """
+    if backend.name == 'github':
+        try:
+            developeruser = Developer.objects.get(user=user)
+        except:
+            developer = Developer()
+            developer.githubuser = response['login']
+            developer.avatar = response['avatar_url']
+            developer.repos = response['public_repos']
+            developer.user = user
+            developer.save()

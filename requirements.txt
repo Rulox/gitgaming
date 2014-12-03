@@ -1,3 +1,5 @@
 #django==1.7
 easy-thumbnails
 pygithub3
+python-social-auth
+mongoengine
