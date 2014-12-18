@@ -66,7 +66,7 @@
                             <ul class="list-inline intro-social-buttons">
                             {% if user and not user.is_anonymous %}
                                   <li>
-                                    <a href="{% url 'user_detail' user.django_user.pk %}" class="btn btn-default btn-lg"><i class="fa fa-user"></i> <span class="network-name">Ir a tu perfil</span></a>
+                                    <a href="{% url 'user_detail' user %}" class="btn btn-default btn-lg"><i class="fa fa-user"></i> <span class="network-name">Ir a tu perfil</span></a>
                                     <a href="{% url 'auth:logout' %}?next={{ request.path }}" class="btn btn-default btn-lg"><i class="fa fa-sign-out"></i> <span class="network-name">Logout</span></a>
                                 </li>
 

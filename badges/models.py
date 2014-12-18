@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext as _
 import tasks
 
 # Create your models here.
@@ -10,7 +11,8 @@ import tasks
     a dictionary. Note that tasks are coded in "method" module.
 """
 #FIXME esto no va
-METHOD_CHOICES = [(nombre, nombre) for nombre in dir(tasks)]  # for method in dir(tasks)...
+METHOD_CHOICES = [(name, name) for name in dir(tasks)]  # for method in dir(tasks)...
+
 
 class Badge(models.Model):
     """ Parent class
@@ -19,8 +21,12 @@ class Badge(models.Model):
     name = models.CharField(blank=False, null=False, max_length=255)
     description = models.TextField(blank=False, null=False)
     image = models.FileField(upload_to="/badges/", blank=False, null=False)
-    date = models.DateTimeField(verbose_name="Date of achievement", name="date", auto_now=True)
-    method = models.CharField(choices=METHOD_CHOICES, blank=False, null=False, max_length=512, default=METHOD_CHOICES[0])
+    date = models.DateTimeField(verbose_name='Creation date', name="date", auto_now=True)
+    experience = models.DecimalField(verbose_name=_('Experience gained with this badge'),
+                                     default=5.0, decimal_places=2, max_digits=4)
+    method = models.CharField(choices=METHOD_CHOICES, blank=False, null=False,
+                              max_length=512,
+                              default=METHOD_CHOICES[0])
 
     class Meta:
         abstract = True
@@ -33,7 +39,7 @@ class FidelityBadge(Badge):
 
         It has the fields of the Parent and these:
     """
-    endDate = models.DateTimeField(verbose_name="Deadtime for the Badge", blank=False, null=False)
+    end_date = models.DateTimeField(verbose_name="Deadtime for the Badge", blank=False, null=False)
 
 
 class LanguageBadge(Badge):

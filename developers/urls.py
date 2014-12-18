@@ -1,9 +1,7 @@
 from django.conf.urls import patterns, include, url
-from views import DeveloperDetailView
-
+from views import DeveloperView
 
 urlpatterns = patterns('',
-    url(r'^(?P<pk>\d+)$', DeveloperDetailView.as_view(), name='user_detail'),
-
+    url(r'^(?P<user>\w+)/$', DeveloperView.as_view(), name='user_detail'),
 )
 

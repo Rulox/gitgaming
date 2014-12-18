@@ -1,5 +1,6 @@
 # from django.conf import settings
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext as _
@@ -16,14 +17,14 @@ class Developer(models.Model):
     """
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='django_user')
-    githubuser = models.CharField(max_length=255, null=False, blank=False)
-    level = models.IntegerField(null=True, blank=True, default=1)
+    githubuser = models.CharField(verbose_name=_('GitHub User account'), max_length=255, null=False, blank=False)
+    level = models.IntegerField(verbose_name=_('Current level'), null=True, blank=True, default=1)
     repos = models.IntegerField(null=True, blank=True)  # IDEA: You have X repositories in your inventory
-    maxstreak = models.IntegerField(null=True, blank=True)
+    max_streak = models.IntegerField(null=True, blank=True)
     experience = models.DecimalField(null=True, blank=True, default=0.0, decimal_places=2, max_digits=4)
     title = models.CharField(null=True, blank=True, max_length=255)
-    registerdate = models.DateTimeField(auto_now=True)
-    lastupdate = models.DateTimeField(auto_now=True)
+    register_date = models.DateTimeField(auto_now=True)
+    last_update = models.DateTimeField(auto_now=True)
     avatar = models.URLField(null=True, blank=True)
 
     def __unicode__(self):
@@ -47,9 +48,7 @@ def save_user(backend, user, response, *args, **kwargs):
         authenticated user
     """
     if backend.name == 'github':
-        try:
-            developeruser = Developer.objects.get(user=user)
-        except:
+        if not Developer.objects.get(user=user):
             developer = Developer()
             developer.githubuser = response['login']
             developer.avatar = response['avatar_url']

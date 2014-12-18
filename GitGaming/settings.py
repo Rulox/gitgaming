@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-SECRET_KEY = 'gitgamingdevelopmentkeyhaha'
+SECRET_KEY = 'changethis'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,8 +40,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Locales
     'developers',
     'badges',
+    'stats',
+    # Externas
+    'django_extensions',
     'easy_thumbnails',
     'pygithub3',
     'social.apps.django_app.default',
