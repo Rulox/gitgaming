@@ -3,8 +3,9 @@ Git Gaming (GG)
 ### http://www.gitgaming.com
 
 -
+Made for the **IX Open Source Contest** in http://www.concursosoftwarelibre.org/ will be continued after the contest. We want to create a big community of Developers/Game lovers in order to create stats and analyze data in a *"gamer"* and funny way.
 
-Gamified System for GitHub Developers. Track your work in GitHub repositories with us. Use our system in order to improve your production or analyze your team work in a funny way.
+Open Source Gamified System for GitHub Developers. Track your work in GitHub repositories with us. Use our system in order to improve your production or analyze your team work in a funny way.
 
 With GitGaming, you will live the Gaming experience while you are developing as usual. Make tests, follow good practises and document your code to get more experience and achievements in order to be first in our Rankings. Earn badges or titles and compare your progression with your dev friends.
 
