@@ -1,0 +1,23 @@
+# https://api.github.com/repos/Rulox/LUNO/languages
+
+class Language:
+    """
+        With this class, we can check, for each Developer, if he has reached certain
+        amount of lines/bytes in each programming language.
+    """
+    def __init__(self):
+        return
+
+    def __unicode__(self):
+        return "Language Badge"
+
+    def check(self, user, bytes, language, **kwargs):
+        """
+        Check LanguageBadge
+        :param user:  Developer
+        :param bytes:  Bytes or Lines in a language
+        :param language:  String with the name of the language
+        :param kwargs:
+        :return: True/False if badge is given or not
+        """
+        return

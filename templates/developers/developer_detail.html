@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% load staticfiles i18n thumbnail%}
+{% load staticfiles i18n thumbnail %}
 
 
-{% block title %}{{ user }}{% endblock title %}
+{% block title %}{{ user }} {% trans '- Profile' %} GG{% endblock title %}
 
 {% block header %}
 {% endblock header %}
@@ -13,11 +13,14 @@
         <div class="row">
             <div class="col-md-3">
                 <h1></h1>
+            {% thumbnail object.avatar 150x150 as thumb %}
+            {{ thumb.url }}
+                <img src=''>
                 <div class="avatar"><img class="img-responsive" src="{{ object.avatar }}"></div>
                 <h2>{{ object.githubuser }}</h2>
                 <h4> {% trans 'Experiencia' %}: {{ object.experience }}</h4>
                 <h4> {% trans 'Nivel' %}: {{ object.level }}</h4>
-            {{ pk }}
+
                 {% if user == object.user %}
                     <a>Administrar perfil</a>
                 {% endif %}

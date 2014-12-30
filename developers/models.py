@@ -1,4 +1,5 @@
 # from django.conf import settings
+from datetime import time
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.signals import pre_save
@@ -6,7 +7,9 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 from django.db import models
 from django.contrib.auth import get_user_model
-
+from badges.models import Badge
+from stats.models import APIStats, UserStats
+import time
 
 # Create your models here.
 class Developer(models.Model):
@@ -31,14 +34,15 @@ class Developer(models.Model):
         return self.githubuser
 
 
-
 class Profile(models.Model):
     """ Developer Game Profile
         Each user has a "Gaming profile". It will collect information about
-        some skills so a
+        some basic skills. It's the same as "INTELECT" or "STAMINA" in some videogames.
     """
-    pass
+    dev_user = models.OneToOneField(Developer, related_name='profile')
 
+    def __unicode__(self):
+        return 'Profile of: {}'.format(self.developer)
 
 
 def save_user(backend, user, response, *args, **kwargs):
@@ -48,7 +52,26 @@ def save_user(backend, user, response, *args, **kwargs):
         authenticated user
     """
     if backend.name == 'github':
-        if not Developer.objects.get(user=user):
+        try:
+            Developer.objects.get(user=user)
+            # If exists, we check for any new update in the repos. Check all the badges
+            # FIXME In the future, this function will be called using Celery
+            return
+        except ObjectDoesNotExist:
+            if settings.DEBUG:
+                print "Creating new user {}".format(user)
+
+            # Analytics stuff
+            now = time.strftime('%Y-%m-%d')
+            u, created = UserStats.objects.get_or_create(date=now)
+            u.inc_user()
+            u.save()
+
+            api, created = APIStats.objects.get_or_create(date=now)
+            api.inc_call()
+            api.save()
+
+            # Create user
             developer = Developer()
             developer.githubuser = response['login']
             developer.avatar = response['avatar_url']

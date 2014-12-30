@@ -20,7 +20,7 @@ class Badge(models.Model):
     """
     name = models.CharField(blank=False, null=False, max_length=255)
     description = models.TextField(blank=False, null=False)
-    image = models.FileField(upload_to="/badges/", blank=False, null=False)
+    image = models.FileField(upload_to='/badges/', blank=False, null=False)
     date = models.DateTimeField(verbose_name='Creation date', name="date", auto_now=True)
     experience = models.DecimalField(verbose_name=_('Experience gained with this badge'),
                                      default=5.0, decimal_places=2, max_digits=4)
@@ -39,7 +39,7 @@ class FidelityBadge(Badge):
 
         It has the fields of the Parent and these:
     """
-    end_date = models.DateTimeField(verbose_name="Deadtime for the Badge", blank=False, null=False)
+    end_date = models.DateTimeField(verbose_name='Deadtime for the Badge', blank=False, null=False)
 
 
 class LanguageBadge(Badge):
@@ -48,5 +48,13 @@ class LanguageBadge(Badge):
         These kind of badges are granted when users reach X bytes of code
         in a language. Parameters are Number of bytes and Language.
     """
-    bytes = models.IntegerField(verbose_name="Number of bytes", blank=False, null=False)
-    language = models.CharField(verbose_name="Language. (ie: Ruby, Python, etc)", max_length=255, blank=False, null=False)
+    bytes = models.IntegerField(verbose_name='Number of bytes or lines', blank=False, null=False)
+    language = models.CharField(verbose_name='Language. (ie: Ruby, Python, etc)', max_length=255, blank=False, null=False)
+
+
+class LevelBadge(Badge):
+    """
+        Badge given when you reach certain levels.
+    """
+
+    level = models.IntegerField(verbose_name='Level', blank=False, null=False)
