@@ -1,4 +1,5 @@
 # https://api.github.com/repos/Rulox/LUNO/languages
+from pygithub3 import Github
 
 class Language:
     """
@@ -20,4 +21,10 @@ class Language:
         :param kwargs:
         :return: True/False if badge is given or not
         """
+        gh = Github(login=user)
+        developer = gh.users.get(user) # Api call
+        repos = gh.repos.get()
+        print repos
+
+
         return

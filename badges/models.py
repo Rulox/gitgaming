@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
-import tasks
+import pkgutil
+
 
 # Create your models here.
 """
@@ -10,8 +11,12 @@ import tasks
     We have to pass, for each badge, method number, and parameters in
     a dictionary. Note that tasks are coded in "method" module.
 """
-#FIXME esto no va
-METHOD_CHOICES = [(name, name) for name in dir(tasks)]  # for method in dir(tasks)...
+modules = pkgutil.iter_modules(path=["badges/tasks"])
+a = []
+for loader, mod_name, ispkg in modules:
+    a.append(str(mod_name))
+
+METHOD_CHOICES = [(name, name) for name in a]
 
 
 class Badge(models.Model):
@@ -19,8 +24,10 @@ class Badge(models.Model):
         Base Badge.
     """
     name = models.CharField(blank=False, null=False, max_length=255)
+    title = models.CharField(verbose_name=_('Title given with badge (if proceed)'), blank=True,
+                             null=True, max_length=255)
     description = models.TextField(blank=False, null=False)
-    image = models.FileField(upload_to='/badges/', blank=False, null=False)
+    image = models.FileField(upload_to='badges', blank=False, null=False)
     date = models.DateTimeField(verbose_name='Creation date', name="date", auto_now=True)
     experience = models.DecimalField(verbose_name=_('Experience gained with this badge'),
                                      default=5.0, decimal_places=2, max_digits=4)
@@ -28,9 +35,8 @@ class Badge(models.Model):
                               max_length=512,
                               default=METHOD_CHOICES[0])
 
-    class Meta:
-        abstract = True
-
+    def __unicode__(self):
+        return "{}".format(self.name)
 
 class FidelityBadge(Badge):
     """ Fidelity Badge
@@ -41,6 +47,12 @@ class FidelityBadge(Badge):
     """
     end_date = models.DateTimeField(verbose_name='Deadtime for the Badge', blank=False, null=False)
 
+    def __unicode__(self):
+        return "{} until {}".format(self.name, self.end_date)
+
+    @staticmethod
+    def is_fidelity():
+        return True
 
 class LanguageBadge(Badge):
     """ Language Bytes count Badge
@@ -51,6 +63,12 @@ class LanguageBadge(Badge):
     bytes = models.IntegerField(verbose_name='Number of bytes or lines', blank=False, null=False)
     language = models.CharField(verbose_name='Language. (ie: Ruby, Python, etc)', max_length=255, blank=False, null=False)
 
+    def __unicode__(self):
+        return "{} badge from {} bytes of code".format(self.name, self.bytes)
+
+    @staticmethod
+    def is_language():
+        return True
 
 class LevelBadge(Badge):
     """

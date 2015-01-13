@@ -29,17 +29,29 @@ class Developer(models.Model):
     register_date = models.DateTimeField(auto_now=True)
     last_update = models.DateTimeField(auto_now=True)
     avatar = models.URLField(null=True, blank=True)
+    badge = models.ManyToManyField(Badge, through='Achievement')
 
     def __unicode__(self):
         return self.githubuser
 
+class Achievement(models.Model):
+    """
+        Achievement class. This model is used to connect Users with Badges. It will have information
+        about each badge earned by every user and the date of the achievement.
+    """
+    date = models.DateField(auto_now=True)
+    user = models.ForeignKey(Developer, related_name='developer')
+    badge = models.ForeignKey(Badge, related_name='badge')
 
 class Profile(models.Model):
     """ Developer Game Profile
         Each user has a "Gaming profile". It will collect information about
         some basic skills. It's the same as "INTELECT" or "STAMINA" in some videogames.
+
+        It will store also the image that every user can upload to their header profile page. Just like Facebook, etc.
     """
     dev_user = models.OneToOneField(Developer, related_name='profile')
+    header = models.FileField(upload_to='/headers/', blank=True, null=True)
 
     def __unicode__(self):
         return 'Profile of: {}'.format(self.developer)

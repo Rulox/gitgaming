@@ -93,7 +93,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-
+MEDIA_ROOT = '/proyectos/GitGaming/GitGaming/media'
 MEDIA_URL = '/media/'
 
 TEMPLATE_DIRS = (
