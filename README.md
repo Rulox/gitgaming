@@ -1,5 +1,7 @@
 Git Gaming (GG)
 =========
+If you want to receive news about the progress of this proyect, visit
+
 ### http://www.gitgaming.com
 
 -
