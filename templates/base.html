@@ -41,6 +41,21 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav navbar-right">
+                {% if user and not user.is_anonymous %}
+                     <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                          <img style="width: 26px; display:inline-block; border: 1px solid #333333" src="{{ user.django_user.avatar }}" class="img img-responsive">
+                          <span style="float: right; margin-top: 10px" class="caret"></span></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="{% url 'user_detail' user %}">{% trans 'Ir a mi perfil' %}</a></li>
+                        <li><a class="disabled" href="#">{% trans 'Editar mi perfil' %}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{% url 'auth:logout' %}?next=/">Log Out</a></li>
+
+                      </ul>
+                    </li>
+                {% endif %}
+
                 <li><a href="/">{% trans 'Home' %}</a></li>
                 <li><a href="/">FAQ</a></li>
                 <li><a href="/">{% trans 'About' %}</a></li>
@@ -67,7 +82,7 @@
                             {% if user and not user.is_anonymous %}
                                   <li>
                                     <a href="{% url 'user_detail' user %}" class="btn btn-default btn-lg"><i class="fa fa-user"></i> <span class="network-name">Ir a tu perfil</span></a>
-                                    <a href="{% url 'auth:logout' %}?next={{ request.path }}" class="btn btn-default btn-lg"><i class="fa fa-sign-out"></i> <span class="network-name">Logout</span></a>
+                                    <a href="{% url 'auth:logout' %}?next=/" class="btn btn-default btn-lg"><i class="fa fa-sign-out"></i> <span class="network-name">Logout</span></a>
                                 </li>
 
                             {% else %}
