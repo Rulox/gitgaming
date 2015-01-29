@@ -1,8 +1,10 @@
 Git Gaming (GG)
 =========
+http://www.gitgaming.com
+
 If you want to receive news about the progress of this proyect, visit
 
-### http://www.gitgaming.com
+### https://gitgaming.wordpress.com/
 
 -
 Made for the **IX Open Source Contest** in http://www.concursosoftwarelibre.org/ will be continued after the contest. We want to create a big community of Developers/Game lovers in order to create stats and analyze data in a *"gamer"* and funny way.
