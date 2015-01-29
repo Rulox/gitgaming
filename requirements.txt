@@ -2,4 +2,6 @@
 easy-thumbnails
 pygithub3
 python-social-auth
-mongoengine
+#mongoengine
+requests
+requests-cache

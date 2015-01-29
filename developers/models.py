@@ -1,4 +1,5 @@
 # from django.conf import settings
+from audioop import alaw2lin
 from datetime import time
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -33,6 +34,13 @@ class Developer(models.Model):
 
     def __unicode__(self):
         return self.githubuser
+
+"""
+    def check_badges(self):
+        for badge in Badge.objects.get(all):
+"""
+
+
 
 class Achievement(models.Model):
     """

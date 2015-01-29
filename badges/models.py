@@ -38,6 +38,22 @@ class Badge(models.Model):
     def __unicode__(self):
         return "{}".format(self.name)
 
+    @property
+    def is_language(self):
+        try:
+            return self.languagebadge
+        except LanguageBadge.DoesNotExist:
+            return False
+
+
+    @property
+    def is_language(self):
+        try:
+            return self.fidelitybadge
+        except FidelityBadge.DoesNotExist:
+            return False
+
+
 class FidelityBadge(Badge):
     """ Fidelity Badge
         These kinds of badges are granted when users create an account
@@ -50,9 +66,7 @@ class FidelityBadge(Badge):
     def __unicode__(self):
         return "{} until {}".format(self.name, self.end_date)
 
-    @staticmethod
-    def is_fidelity():
-        return True
+
 
 class LanguageBadge(Badge):
     """ Language Bytes count Badge
@@ -66,9 +80,6 @@ class LanguageBadge(Badge):
     def __unicode__(self):
         return "{} badge from {} bytes of code".format(self.name, self.bytes)
 
-    @staticmethod
-    def is_language():
-        return True
 
 class LevelBadge(Badge):
     """
