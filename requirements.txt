@@ -1,7 +1,9 @@
-#django==1.7
+django==1.7
 easy-thumbnails
 pygithub3
 python-social-auth
 #mongoengine
 requests
 requests-cache
+gunicorn
+psycopg2
