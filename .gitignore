@@ -8,6 +8,7 @@ migrations
 SECRET.py
 media
 virtualenv
+test_cache.sqlite
 
 # C extensions
 *.so

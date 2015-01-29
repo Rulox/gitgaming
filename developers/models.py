@@ -35,10 +35,10 @@ class Developer(models.Model):
     def __unicode__(self):
         return self.githubuser
 
-"""
+
     def check_badges(self):
-        for badge in Badge.objects.get(all):
-"""
+        for badge in Badge.objects.get():
+
 
 
 
