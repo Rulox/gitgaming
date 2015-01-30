@@ -10,6 +10,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from badges.models import Badge
 from stats.models import APIStats, UserStats
+from badges.tasks import Language
 import time
 
 # Create your models here.
@@ -37,7 +38,13 @@ class Developer(models.Model):
 
 
     def check_badges(self):
-        for badge in Badge.objects.get():
+        for badge in Badge.objects.all():
+            if badge not in Achievement.objects.filter(user=self.user, badge=badge):
+                # Check all types of badges
+                if badge.is_language:
+                    l = Language.Language()
+                    #print l.check(self.githubuser, lang.bytes, lang.language)
+
 
 
 
@@ -73,9 +80,10 @@ def save_user(backend, user, response, *args, **kwargs):
     """
     if backend.name == 'github':
         try:
-            Developer.objects.get(user=user)
+            dev = Developer.objects.get(user=user)
             # If exists, we check for any new update in the repos. Check all the badges
             # FIXME In the future, this function will be called using Celery
+            dev.check_badges()
             return
         except ObjectDoesNotExist:
             if settings.DEBUG:
