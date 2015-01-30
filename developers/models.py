@@ -10,7 +10,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from badges.models import Badge
 from stats.models import APIStats, UserStats
-from badges.tasks import Language
+#from badges.tasks import Language
 import time
 
 # Create your models here.
@@ -36,7 +36,7 @@ class Developer(models.Model):
     def __unicode__(self):
         return self.githubuser
 
-
+"""
     def check_badges(self):
         for badge in Badge.objects.all():
             if badge not in Achievement.objects.filter(user=self.user, badge=badge):
@@ -44,7 +44,7 @@ class Developer(models.Model):
                 if badge.is_language:
                     l = Language.Language()
                     #print l.check(self.githubuser, lang.bytes, lang.language)
-
+"""
 
 
 
