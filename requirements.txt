@@ -7,3 +7,4 @@ requests
 requests-cache
 gunicorn
 psycopg2
+django-image-cropping

@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-13 21:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\GitGaming\settings.py:89
+msgid "Spanish"
+msgstr ""
+
+#: .\GitGaming\settings.py:90
+msgid "English"
+msgstr ""
+
+#: .\badges\models.py:27
+msgid "Title given with badge (if proceed)"
+msgstr ""
+
+#: .\badges\models.py:32
+msgid "Experience gained with this badge"
+msgstr ""
+
+#: .\developers\models.py:28
+msgid "GitHub User account"
+msgstr ""
+
+#: .\developers\models.py:29
+msgid "Current level"
+msgstr ""
+
+#: .\stats\models.py:12 .\stats\models.py:30 .\stats\models.py:47
+msgid "Day stats"
+msgstr ""
+
+#: .\stats\models.py:13
+msgid "Number of API Calls"
+msgstr ""
+
+#: .\stats\models.py:31
+msgid "Number of New Users"
+msgstr ""
+
+#: .\stats\models.py:48
+msgid "Number of repositories"
+msgstr ""
+
+#: .\templates\base.html:12
+msgid "Gamified Statistics for GitHub Code"
+msgstr ""
+
+#: .\templates\base.html:51
+msgid "Go to my profile"
+msgstr ""
+
+#: .\templates\base.html:52
+msgid "Edit my profile"
+msgstr ""
+
+#: .\templates\base.html:60
+msgid "Home"
+msgstr ""
+
+#: .\templates\base.html:62
+msgid "About"
+msgstr ""
+
+#: .\templates\base.html:63
+msgid "Contact"
+msgstr ""
+
+#: .\templates\base.html:64
+msgid "Blog"
+msgstr ""
+
+#: .\templates\developers\developer_detail.html:5
+#: .\templates\developers\developer_edit.html:5
+msgid "Profile"
+msgstr ""
+
+#: .\templates\developers\developer_detail.html:30
+msgid "Experience"
+msgstr ""
+
+#: .\templates\developers\developer_detail.html:31
+msgid "Level"
+msgstr ""
+
+#: .\templates\developers\developer_detail.html:38
+msgid "Badges"
+msgstr ""

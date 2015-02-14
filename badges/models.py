@@ -4,20 +4,14 @@ import pkgutil
 
 
 # Create your models here.
-"""
-    Each badge has to have a method associated. With this method
-    we can check if an user has the requirements to earn the badge.
-
-    We have to pass, for each badge, method number, and parameters in
-    a dictionary. Note that tasks are coded in "method" module.
-"""
+""" Deprecated
 modules = pkgutil.iter_modules(path=["badges/tasks"])
 a = []
 for loader, mod_name, ispkg in modules:
     a.append(str(mod_name))
 
 METHOD_CHOICES = [(name, name) for name in a]
-
+"""
 
 class Badge(models.Model):
     """ Parent class
@@ -27,13 +21,10 @@ class Badge(models.Model):
     title = models.CharField(verbose_name=_('Title given with badge (if proceed)'), blank=True,
                              null=True, max_length=255)
     description = models.TextField(blank=False, null=False)
-    image = models.FileField(upload_to='badges', blank=False, null=False)
+    image = models.ImageField(upload_to='badges', blank=False, null=False)
     date = models.DateTimeField(verbose_name='Creation date', name="date", auto_now=True)
     experience = models.DecimalField(verbose_name=_('Experience gained with this badge'),
                                      default=5.0, decimal_places=2, max_digits=4)
-    method = models.CharField(choices=METHOD_CHOICES, blank=False, null=False,
-                              max_length=512,
-                              default=METHOD_CHOICES[0])
 
     def __unicode__(self):
         return "{}".format(self.name)
@@ -47,7 +38,7 @@ class Badge(models.Model):
 
 
     @property
-    def is_language(self):
+    def is_fidelity(self):
         try:
             return self.fidelitybadge
         except FidelityBadge.DoesNotExist:
@@ -80,6 +71,21 @@ class LanguageBadge(Badge):
     def __unicode__(self):
         return "{} badge from {} bytes of code".format(self.name, self.bytes)
 
+
+class ForkBadge(Badge):
+    """ ForkBadge
+
+        These kinds of badges are granted when user has X number of repos forked from
+        other user's repos. We want to make a comparision between "Fork" and "Force" from Star Wars
+        to make these badges funnier.
+
+        i.e. 'May the Fork be with you'
+    """
+    forks = models.IntegerField(verbose_name='Number fo minium repos forked', blank=False, null=False)
+
+
+class SuperStarBadge(Badge):
+    pass
 
 class LevelBadge(Badge):
     """

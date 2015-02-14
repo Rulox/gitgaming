@@ -2,35 +2,43 @@
 {% load staticfiles i18n thumbnail %}
 
 
-{% block title %}{{ user }} {% trans '- Profile' %} GG{% endblock title %}
+{% block title %}{{ user }} - {% trans 'Profile' %} GitGaming{% endblock title %}
 
 {% block header %}
 {% endblock header %}
 
+{% block extra_head %}
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+{% endblock extra_head %}
+
 
 {% block body %}
-    <div class="container">
+    <div class="container profile-container">
         <div class="row">
-            <div class="col-md-3">
-                <h1></h1>
-            {% thumbnail object.avatar 150x150 as thumb %}
-            {{ thumb.url }}
-                <img src=''>
-                <div class="avatar"><img class="img-responsive" src="{{ object.avatar }}"></div>
-                <h2>{{ object.githubuser }}</h2>
-                <h4> {% trans 'Experiencia' %}: {{ object.experience }}</h4>
-                <h4> {% trans 'Nivel' %}: {{ object.level }}</h4>
 
-                {% if user == object.user %}
-                    <a>Administrar perfil</a>
-                {% endif %}
-            <h3>¡Tienes {{ object.repos }} repositorios en tu inventario!</h3>
+        {% if object.profile.header %}
+            {% thumbnail object.profile.header 1170x300 box=object.profile.header_cropping crop detail upscale as header %}
+        {% endif %}
+
+        <div class="header" {% if object.profile.header %}style="background-image:url('{{header.url}}')"{% endif %}>
+            <div class="avatar-wrapper">
+               <img style="height:175px" class="avatar img-responsive" src="{{ object.avatar }}">
+            </div>
+        </div>
+            <div class="col-md-12">
+                <h2>{{ object.githubuser }}</h2>
+                <h4> {% trans 'Experience' %}: {{ object.experience }}</h4>
+                <h4> {% trans 'Level' %}: {{ object.level }}</h4>
+
+            <h3>¡Tiene {{ object.repos }} repositorios en el inventario!</h3>
 
             </div>
 
-             <div class="col-md-9">
-                <h1>{% trans 'Datos' %}</h1>
-                 -- No data --
+             <div class="col-md-12">
+                <h1>{% trans 'Badges' %}</h1>
+                {% for badge in badges %}
+                    {{ badge }} <br>
+                {% endfor %}
             </div>
         </div>
     </div>

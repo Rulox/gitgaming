@@ -10,7 +10,13 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import requests_cache
+from easy_thumbnails.conf import Settings as thumbnail_settings
+
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+requests_cache.install_cache('test_cache', backend='sqlite', expire_after=3000)  # Cache
 
 
 # Quick-start development settings - unsuitable for production
@@ -31,6 +37,11 @@ SOCIAL_AUTH_GITHUB_KEY = GITHUB1
 SOCIAL_AUTH_GITHUB_SECRET = GITHUB2
 
 
+# Cropping images
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -47,12 +58,14 @@ INSTALLED_APPS = (
     # Externas
     'django_extensions',
     'easy_thumbnails',
+    'image_cropping',
     'pygithub3',
     'social.apps.django_app.default',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -70,19 +83,17 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.github.GithubOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
-# Database
-# SQLITE for develop
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+from django.utils.translation import ugettext_lazy as _
 
+LANGUAGES = (
+    ('es', _('Spanish')),
+    ('en', _('English')),
+)
 
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'es'
 
-LANGUAGE_CODE = 'es-es'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -131,3 +142,14 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 LOGIN_REDIRECT_URL = '/'
+
+# Production STUFF
+if not DEBUG:
+    from settings_production import *
+else:
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }

@@ -1,9 +1,7 @@
-class Fidelity:
-    def __init__(self):
-        return
+from django.utils import timezone
 
-    def __unicode__(self):
-        return "Fidelity Badge"
-
-    def check(self, user, **kwargs):
-        return
+def check(date, **kwargs):
+    now = timezone.now()
+    if now < date:
+        return True
+    return False
