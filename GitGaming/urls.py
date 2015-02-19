@@ -2,10 +2,11 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 import developers
 from portal.views import PortalView
+from developers.views import DeveloperProfileEditView
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from GitGaming import settings
-
+from django.contrib.auth.decorators import login_required
 
 admin.autodiscover()
 
@@ -22,6 +23,7 @@ urlpatterns = patterns('',
 
 urlpatterns += i18n_patterns('',
     url(r'^user/', include('developers.urls')),
+    url(r'^edit/$', login_required(DeveloperProfileEditView.as_view()), name='user_edit'),
     url(r'^$', PortalView.as_view(), name='home'),
 
 )

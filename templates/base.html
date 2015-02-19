@@ -51,7 +51,7 @@
                           <span style="float: right; margin-top: 10px" class="caret"></span></a>
                       <ul class="dropdown-menu" role="menu">
                         <li><a href="{% url 'user_detail' user %}">{% trans 'Go to my profile' %}</a></li>
-                        <li><a class="disabled" href="{% url 'user_edit' user %}">{% trans 'Edit my profile' %}</a></li>
+                        <li><a class="disabled" href="{% url 'user_edit' %}">{% trans 'Edit my profile' %}</a></li>
                         <li class="divider"></li>
                         <li><a href="{% url 'auth:logout' %}?next=/">Log Out</a></li>
 

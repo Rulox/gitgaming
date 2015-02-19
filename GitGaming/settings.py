@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'image_cropping',
     'pygithub3',
     'social.apps.django_app.default',
+    'crispy_forms',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -78,6 +79,7 @@ ROOT_URLCONF = 'GitGaming.urls'
 
 WSGI_APPLICATION = 'GitGaming.wsgi.application'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3' #Crispy Forms template
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.github.GithubOAuth2',

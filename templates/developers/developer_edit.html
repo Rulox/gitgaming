@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles i18n thumbnail %}
+{% load staticfiles i18n thumbnail  crispy_forms_tags%}
 
 
 {% block title %}{{ user }} - {% trans 'Profile' %} Edit Profile{% endblock title %}
@@ -9,6 +9,16 @@
 
 {% block extra_head %}
     <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+    <link href="{% static 'css/jquery.guillotine.css' %}" rel="stylesheet">
+    <link href="{% static 'css/forms.css' %}" rel="stylesheet">
+    <style>
+        .avatar-wrapper {
+            z-index: 1;
+        }
+        .guillotine-window {
+            height: 300px !important;
+        }
+    </style>
 {% endblock extra_head %}
 
 
@@ -16,26 +26,78 @@
     <div class="container profile-container">
         <div class="row">
         {% if object.header %}
-            {% thumbnail object.header 1170x300 box=object.header_cropping crop detail upscale as header %}
+            {% thumbnail object.header 1170x300 box=object.header_cropping detail upscale as header %}
         {% endif %}
-
-        <div class="header" {% if object.header %}style="background-image:url('{{header.url}}')"{% endif %}>
-            <div class="avatar-wrapper">
-               <img style="height:175px" class="avatar img-responsive" src="{{ object.dev_user.avatar }}">
-            </div>
+        <div class="avatar-wrapper">
+           <img style="height:175px;" class="avatar img-responsive" src="{{ object.dev_user.avatar }}">
         </div>
-            <div class="col-md-12">
-                {{ object.profile.header_cropping }}
+        <div class="header" >
+            <img alt="crop img" id="crop" src="{{object.header.url}}">
 
-                <form action="" method="post">
+        </div>
+
+            <div class="form col-md-6 col-md-offset-3">
+                <h1>{{ object.dev_user }}</h1>
+                <h3>Edit your profile</h3>
+                <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="Editar" class="btn btn-default"/>
+                    {{ form|crispy }}
+                    <input class="btn btn-warning" type="submit" value="{% trans 'Save Profile' %}" class="btn btn-default"/>
                 </form>
-
             </div>
 
 
         </div>
     </div>
 {% endblock body %}
+
+{% block extra_body %}
+    <script src="{% static 'js/jquery.guillotine.min.js' %}"></script>
+    <script type="text/javascript">
+    var picture = $("#crop");
+    var coordinates = [{{ object.header_cropping }}];
+
+    picture.on('load', function() {
+
+        picture.guillotine({
+            width: 1170,
+            height: 300,
+            init: {
+                scale: 0,
+                angle: 0,
+                x: coordinates[0],
+                y: coordinates[1]
+            },
+            onChange: function(data, action) { //TODO Validar el tamaño de la foto antes de ponerla
+                $("#id_header_cropping").val(data.x + "," + data.y + "," +  (data.x + 1170) + "," + (data.y + 300));
+            }
+        });
+
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            $("#id_header_cropping").val("0,0,1170,300");
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                console.log("a")
+                $("#crop").attr('src', e.target.result);
+                console.log(picture.guillotine('getData'))
+                picture.guillotine('remove');
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#id_header").change(function() {
+        readURL(this);
+    });
+
+
+
+    </script>
+
+
+{% endblock extra_body %}
