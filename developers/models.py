@@ -30,7 +30,6 @@ class Developer(models.Model):
     repos = models.IntegerField(null=True, blank=True)
     max_streak = models.IntegerField(null=True, blank=True)
     experience = models.DecimalField(null=True, blank=True, default=0.0, decimal_places=2, max_digits=4)
-    title = models.CharField(null=True, blank=True, max_length=255)
     register_date = models.DateTimeField(auto_now=True)  # FIXME Deprecated. Migration to delete attr
     last_update = models.DateTimeField(auto_now=True)
     avatar = models.URLField(null=True, blank=True)
@@ -147,11 +146,13 @@ class Profile(models.Model):
     header_cropping = ImageRatioField('header', '1170x300')
     bio = models.TextField(blank=True, null=True)
     website = models.URLField(blank=True, null=True)
+    title = models.CharField(null=True, blank=True, max_length=255)
     followers = models.IntegerField(blank=True, null=True, default=0)  # n of followers
     following = models.IntegerField(blank=True, null=True, default=0)  # n of following users
     solver = models.IntegerField(blank=True, null=True, default=0)     # n of open issues in all repos
     stars = models.IntegerField(blank=True, null=True, default=0)      # n of stars in all repos
     forks = models.IntegerField(blank=True, null=True, default=0)      # n of forks in all repos
+
 
     def __unicode__(self):
         return 'Profile of: {}'.format(self.dev_user)

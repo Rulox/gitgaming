@@ -26,19 +26,29 @@
             </div>
         </div>
             <div class="col-md-12">
-                {{ object.profile.header_cropping }}
-                <h2>{{ object.githubuser }}</h2>
+                <div class="title row">
+                    <h2>{{ object.githubuser }} - {{ object.profile.title }}</h2>
+                </div>
+            </div>
+            <div class="col-md-3">
                 <h4> {% trans 'Experience' %}: {{ object.experience }}</h4>
                 <h4> {% trans 'Level' %}: {{ object.level }}</h4>
 
-            <h3>¡Tiene {{ object.repos }} repositorios en el inventario!</h3>
-
+                <p>{{ object.profile.bio }}</p>
+                <p><a href="{{ object.profile.website }}">{% trans 'Personal Website' %}</a></p>
+                <h3> {{ object.repos }} {% trans 'repositories in the inventory' %} </h3>
             </div>
 
-             <div class="col-md-12">
-                <h1>{% trans 'Badges' %}</h1>
-                {% for badge in badges %}
-                    {{ badge }} <br>
+
+             <div class="col-md-9">
+                <h3>{% trans 'Skills' %}</h3>
+                <div class="col-sm-3">POKEMON</div>
+                <div class="col-sm-9">SKILLS</div>
+             <hr>
+                <h3>{% trans 'Last Badges' %}</h3>
+                {% for achievement in badges %}
+                    {% thumbnail achievement.badge.image 100x100 crop detail upscale as badge %}
+                    <img style="float:left" class="img-responsive" src="{{ badge.url }}">
                 {% endfor %}
             </div>
         </div>

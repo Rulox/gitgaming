@@ -2,6 +2,13 @@ body {
     background: #f0f0f0;
 }
 
+.title {
+    padding-left: 230px;
+    height: 60px;
+    background: white;
+    border-bottom: 1px solid #269abc;
+}
+
 .profile-container {
     margin-top: 56px;
     height: 100%;
@@ -22,16 +29,18 @@ body {
 
 .avatar {
     border: 6px solid white;
-
+    border-radius: 16px;
 }
 
 .avatar-wrapper {
+    z-index: 2;
     position: absolute;
-    margin-top: 123px;
+    margin-top: 180px;
     margin-left: 40px;
     width: 177px;
-    border: 1px solid #222222;
+
 }
+
 
 /* Another IDEA
 .profile-info {
