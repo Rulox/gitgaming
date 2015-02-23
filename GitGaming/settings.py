@@ -11,9 +11,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import requests_cache
+import settings_local
 from easy_thumbnails.conf import Settings as thumbnail_settings
-
-
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 requests_cache.install_cache('test_cache', backend='sqlite', expire_after=3000)  # Cache
@@ -25,6 +24,9 @@ SECRET_KEY = 'changethis'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if DEBUG:
+    SITE_ID = 1 
+
 
 TEMPLATE_DEBUG = True
 
@@ -62,6 +64,11 @@ INSTALLED_APPS = (
     'pygithub3',
     'social.apps.django_app.default',
     'crispy_forms',
+    'zinnia',
+    'tagging',
+    'mptt',
+    'django.contrib.sites',
+    'django_comments',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -124,9 +131,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'django.core.context_processors.tz',
+    'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
+    'zinnia.context_processors.version', 
 )
 
 SOCIAL_AUTH_PIPELINE = (
