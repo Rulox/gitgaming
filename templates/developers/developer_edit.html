@@ -32,7 +32,9 @@
            <img style="height:175px;" class="avatar img-responsive" src="{{ object.dev_user.avatar }}">
         </div>
         <div class="header" >
-            <img alt="crop img" id="crop" src="{{object.header.url}}">
+            {% if object.header %}
+                <img alt="crop img" id="crop" src="{{object.header.url}}">
+            {% endif %}
 
         </div>
 

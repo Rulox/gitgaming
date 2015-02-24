@@ -10,3 +10,4 @@ psycopg2
 django-image-cropping
 django-crispy-forms
 django-extensions
+django-blog-zinnia

@@ -18,6 +18,11 @@ urlpatterns = patterns('',
     # url(r'^auth/', 'githubauth.views.Home', name='home'),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),
+
+    #zinnia blog
+    url(r'^weblog/', include('zinnia.urls', namespace='zinnia')),
+    url(r'^comments/', include('django_comments.urls')),
+
 )
 
 
@@ -27,3 +32,6 @@ urlpatterns += i18n_patterns('',
     url(r'^$', PortalView.as_view(), name='home'),
 
 )
+
+
+
