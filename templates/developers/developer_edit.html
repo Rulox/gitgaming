@@ -32,10 +32,7 @@
            <img style="height:175px;" class="avatar img-responsive" src="{{ object.dev_user.avatar }}">
         </div>
         <div class="header" >
-            {% if object.header %}
-                <img alt="crop img" id="crop" src="{{object.header.url}}">
-            {% endif %}
-
+            <img alt="crop img" id="crop" src="{% if object.header %}{{object.header.url}}{% endif %}">
         </div>
 
             <div class="form col-md-6 col-md-offset-3">

@@ -63,6 +63,7 @@ INSTALLED_APPS = (
     'pygithub3',
     'social.apps.django_app.default',
     'crispy_forms',
+    #'zinnia_bootstrap',
     'zinnia',
     'tagging',
     'mptt',
@@ -86,6 +87,7 @@ ROOT_URLCONF = 'GitGaming.urls'
 WSGI_APPLICATION = 'GitGaming.wsgi.application'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3' #Crispy Forms template
+
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.github.GithubOAuth2',
@@ -152,6 +154,13 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 LOGIN_REDIRECT_URL = '/'
+
+TEMPLATE_LOADERS = [
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.eggs.Loader',
+]
+
 
 # Production STUFF
 if not DEBUG:

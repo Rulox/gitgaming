@@ -1,4 +1,4 @@
-{% load staticfiles i18n thumbnail %}
+{% load staticfiles i18n thumbnail zinnia %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +63,7 @@
                 <li><a href="/">FAQ</a></li>
                 <li><a href="/">{% trans 'About' %}</a></li>
                 <li><a href="/">{% trans 'Contact' %}</a></li>
-                <li><a href="http://gitgaming.wordpress.com/" target="_blank">{% trans 'Blog' %}</a></li>
+                <li><a href="{% url 'zinnia:entry_archive_index' %}">{% trans 'Blog' %}</a></li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>
