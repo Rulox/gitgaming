@@ -1,0 +1,20 @@
+{% extends "zinnia:zinnia/base.html" %}
+{% load zinnia i18n %}
+
+{% block sidebar %}
+
+<aside id="widget-categories" class="widget panel panel-default">
+  <div class="panel-heading">
+    {% trans "Categories" %}
+  </div>
+  {% get_categories %}
+</aside>
+<aside id="widget-recents" class="widget panel panel-default">
+  <div class="panel-heading">
+    {% trans "Recent entries" %}
+  </div>
+  {% get_recent_entries %}
+</aside>
+
+
+{% endblock sidebar %}
