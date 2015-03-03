@@ -22,12 +22,7 @@
   {% endwith %}
   {% endblock entry-related-entries %}
   {% block entry-similar-entries %}
-  <div class="entry-similar panel panel-default">
-    <div class="panel-heading">
-      {% trans "Similar entries" %}
-    </div>
-    {% get_similar_entries %}
-  </div>
+
   {% endblock entry-similar-entries %}
   {% block entry-previous-next-entries %}
   <div class="entry-prev-next">
@@ -64,40 +59,11 @@
   </div>
   {% with pingback_list=object.pingbacks %}
   {% block pingbacks-loop %}
-  <ol id="pingback-list" class="list-group">
-    {% for pingback in pingback_list %}
-    <li id="pingback-{{ pingback.pk }}" class="pingback vcard list-group-item {% cycle box1,box2 %}">
-      {% block pingback-info %}
-      <p class="pingback-info">
-	<a href="{{ pingback.url }}" rel="external nofollow"
-           class="fn url org">{{ pingback.name }}</a>
-	{% trans "on" context "on date" %}
-        <abbr class="pingback-published" title="{{ pingback.submit_date|date:"c" }}">
-          {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
-        <a href="#pingback-{{ pingback.pk }}"
-           id="c{{ pingback.pk }}" class="anchor-link"
-           title="{% trans "Direct link to this pingback" %}">#</a>
-      </p>
-      {% endblock pingback-info %}
-      {% block pingback-content %}
-      <p class="pingback-content">
-	{{ pingback.comment }}
-      </p>
-      {% endblock pingback-content %}
-    </li>
-    {% endfor %}
-  </ol>
   {% endblock pingbacks-loop %}
   {% endwith %}
 </section>
 {% endif %}
 {% block pingbacks-status %}
-{% if object.pingbacks_are_open %}
-<p>{% trans "Pingbacks are open." %}</p>
-{% else %}
-<p>{% trans "Pingbacks are closed." %}</p>
-{% endif %}
 {% endblock pingbacks-status %}
 {% endblock entry-pingbacks %}
 
@@ -138,64 +104,23 @@
 </section>
 {% endif %}
 {% block trackbacks-status %}
-{% if object.trackbacks_are_open %}
-<p>
-  <a href="{% url 'zinnia:entry_trackback' object.pk %}" rel="trackback">
-    {% trans "Trackback URL" %}</a>
-</p>
-{% endif %}
 {% endblock trackbacks-status %}
 {% endblock entry-trackbacks %}
 
 {% block entry-comments %}
-{% if object.comment_count %}
-<section id="comments" class="panel panel-info">
-  <div class="panel-heading">
-    {% trans "Comments" %}
-  </div>
-  {% with comment_list=object.comments %}
-  {% block comments-loop %}
-  <ol id="comment-list" class="list-group">
-    {% for comment in comment_list %}
-    <li id="comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
-        class="comment vcard list-group-item {% cycle box1,box2 %}{% if comment.user %} authenticated-comment{% if comment.user.is_staff %} staff-comment{% endif %}{% if comment.user.is_superuser %} superuser-comment{% endif %}{% endif %}">
-      {% block comment-info %}
-      <p class="comment-info">
-      {% block comment-image %}
-      <img src="{% get_gravatar comment.email 60 "G" %}"
-           class="gravatar photo img-thumbnail" alt="{{ comment.name }}" />
-      {% endblock comment-image %}
-	{% if comment.url %}
-	<a href="{{ comment.url }}" rel="external nofollow"
-           class="fn url">{{ comment.name }}</a>
-	{% else %}
-	<span class="fn">{{ comment.name }}</span>
-	{% endif %}
-	{% trans "on" context "on date" %}
-        <abbr class="comment-published" title="{{ comment.submit_date|date:"c" }}">
-          {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
-        <a href="#comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
-           id="c{{ comment.pk }}" class="anchor-link"
-           title="{% trans "Direct link to this comment" %}">#</a>
-      </p>
-      {% endblock comment-info %}
-      {% block comment-content %}
-      {{ comment.comment|linebreaks }}
-      {% endblock comment-content %}
-    </li>
-    {% endfor %}
-  </ol>
-  {% endblock comments-loop %}
-  {% endwith %}
-</section>
-{% else %}
-{% if object.comments_are_open %}
-<p>{% trans "No comments yet." %}</p>
-{% else %}
-<p>{% trans "Comments are closed." %}</p>
-{% endif %}
-{% endif %}
+<div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES * * */
+            var disqus_shortname = 'gitgaming';
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 {% endblock entry-comments %}
 
 {% block admin-tools %}
