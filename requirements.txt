@@ -1,4 +1,4 @@
-#django==1.7
+django>=1.7
 easy-thumbnails
 pygithub3
 python-social-auth
@@ -13,3 +13,5 @@ django-extensions
 django-blog-zinnia
 zinnia-theme-bootstrap
 django-app-namespace-template-loader
+simplejson
+celery

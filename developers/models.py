@@ -120,6 +120,11 @@ class Developer(models.Model):
                     if f.check(b.end_date):
                         self.grant_badge(b)
 
+    def update_data_async(self):
+        from worker.tasks import update_developer
+        update_developer.update_developer.s(self.pk).apply_async()
+
+
 
 class Achievement(models.Model):
     """

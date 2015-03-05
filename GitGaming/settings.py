@@ -16,6 +16,9 @@ from easy_thumbnails.conf import Settings as thumbnail_settings
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 requests_cache.install_cache('test_cache', backend='sqlite', expire_after=3000)  # Cache
 
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -33,10 +36,14 @@ ALLOWED_HOSTS = []
 
 """ Social Keys for AUTH """
 """ DEBUG ONLY """
-from SECRET import *
-SOCIAL_AUTH_GITHUB_KEY = GITHUB1
-SOCIAL_AUTH_GITHUB_SECRET = GITHUB2
-
+try:
+    from SECRET import *
+    SOCIAL_AUTH_GITHUB_KEY = GITHUB1
+    SOCIAL_AUTH_GITHUB_SECRET = GITHUB2
+except ImportError:
+    SOCIAL_AUTH_GITHUB_KEY = ""
+    SOCIAL_AUTH_GITHUB_SECRET = ""
+    pass
 
 # Cropping images
 THUMBNAIL_PROCESSORS = (
@@ -69,6 +76,7 @@ INSTALLED_APPS = (
     'mptt',
     'django.contrib.sites',
     'django_comments',
+    'worker'
 )
 
 MIDDLEWARE_CLASSES = (
