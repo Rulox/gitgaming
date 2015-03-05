@@ -7,7 +7,6 @@ from django.views.generic import TemplateView, FormView, UpdateView
 from developers.models import Developer
 from .forms import DeveloperProfileForm
 
-
 class DeveloperView(TemplateView):
 
     model = Developer
@@ -17,9 +16,7 @@ class DeveloperView(TemplateView):
         context = super(DeveloperView, self).get_context_data(**kwargs)
         developer = Developer.objects.get(githubuser=kwargs['user'])
         context['object'] = developer
-        # FIXME In the future, this function will be called using Celery
-        developer.check_badges()
-        developer.update_profile()
+        developer.update_data_async()
         context['badges'] = Achievement.objects.filter(user=developer).order_by('-date')
         return context
 
