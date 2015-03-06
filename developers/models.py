@@ -122,7 +122,7 @@ class Developer(models.Model):
 
     def update_data_async(self):
         from worker.tasks import update_developer
-        update_developer.update_developer.s(self.pk).apply_async()
+        update_developer.s(self.pk).apply_async()
 
 
 

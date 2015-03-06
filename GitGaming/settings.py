@@ -10,15 +10,18 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import requests_cache
 from easy_thumbnails.conf import Settings as thumbnail_settings
+import requests_cache
+
+requests_cache.install_cache('test_cache', backend='sqlite', expire_after=3000)  # Cache
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-requests_cache.install_cache('test_cache', backend='sqlite', expire_after=3000)  # Cache
+
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+BROKER_URL = 'redis://localhost:6379/0'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/

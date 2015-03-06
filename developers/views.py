@@ -16,9 +16,9 @@ class DeveloperView(TemplateView):
         context = super(DeveloperView, self).get_context_data(**kwargs)
         developer = Developer.objects.get(githubuser=kwargs['user'])
         context['object'] = developer
-        #developer.update_data_async()
-        developer.check_badges()
-        developer.update_profile()
+        developer.update_data_async()
+        #developer.check_badges()
+        #developer.update_profile()
         context['badges'] = Achievement.objects.filter(user=developer).order_by('-date')
         return context
 
