@@ -10,6 +10,10 @@ html {
     height: 100%;
 }
 
+.text-primary {
+    color: #00a1fe;
+}
+
 body,
 h1,
 h2,
@@ -27,12 +31,14 @@ h6 {
 }
 
 .intro-header {
-    padding-top: 20px;
-    padding-bottom: 50px;
-    text-align: center;
+    height: 400px;
+    margin-top: 60px;
+    /*padding-bottom: 50px;*/
+    text-align: left;
     color: #f8f8f8;
-    background: url(../img/slider_1.jpg) no-repeat center center;
+    background-color: #cccccc;
     background-size: cover;
+    border-bottom: 1px solid #222222;
 }
 
 .intro-message {
@@ -41,20 +47,22 @@ h6 {
     padding-bottom: 5%;
 }
 
-.intro-message > h1 {
+.intro-message  h1 {
     margin: 0;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     font-size: 5em;
 }
 
 .intro-divider {
-    width: 400px;
+    width: 100%;
     border-top: 1px solid #f8f8f8;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
-.intro-message > h3 {
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+.intro-message  h3,h4 {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+    font-style: italic;
+    letter-spacing: 1px;
 }
 
 @media(max-width:767px) {
@@ -109,12 +117,6 @@ h6 {
     border-top: 3px solid #e7e7e7;
 }
 
-.banner {
-    padding: 100px 0;
-    color: #f8f8f8;
-    background: url(../img/banner-bg.jpg) no-repeat center center;
-    background-size: cover;
-}
 
 .banner h2 {
     margin: 0;
@@ -157,6 +159,7 @@ h6 {
 }
 
 footer {
+    margin-bottom: 0px;
     padding: 50px 0;
     background-color: #f8f8f8;
 }

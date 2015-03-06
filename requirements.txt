@@ -15,3 +15,4 @@ zinnia-theme-bootstrap
 django-app-namespace-template-loader
 simplejson
 celery
+redis

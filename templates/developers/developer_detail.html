@@ -9,6 +9,7 @@
 
 {% block extra_head %}
     <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+
 {% endblock extra_head %}
 
 
@@ -31,26 +32,86 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <h4> {% trans 'Experience' %}: {{ object.experience }}</h4>
+
                 <h4> {% trans 'Level' %}: {{ object.level }}</h4>
+                <h4> {% trans 'Experience' %}:</h4>
+                <div class="circle text-center" id="circles-1"></div>
+                <hr>
 
                 <p>{{ object.profile.bio }}</p>
                 <p><a href="{{ object.profile.website }}">{% trans 'Personal Website' %}</a></p>
-                <h3> {{ object.repos }} {% trans 'repositories in the inventory' %} </h3>
+                <h4> {{ object.repos }} {% trans 'repositories in the inventory' %} </h4>
             </div>
 
 
              <div class="col-md-9">
-                <h3>{% trans 'Skills' %}</h3>
-                <div class="col-sm-3">POKEMON</div>
-                <div class="col-sm-9">SKILLS</div>
-             <hr>
+
+                <div class="col-sm-4">
+                    <h3>{% trans 'Skills' %}</h3>
+                    <canvas id="myChart" width="200" height="200"></canvas>
+                </div>
+                <div class="col-sm-8">
                 <h3>{% trans 'Last Badges' %}</h3>
-                {% for achievement in badges %}
-                    {% thumbnail achievement.badge.image 100x100 crop detail upscale as badge %}
-                    <img style="float:left" class="img-responsive" src="{{ badge.url }}">
-                {% endfor %}
+                    {% for achievement in badges %}
+                        {% thumbnail achievement.badge.image 100x100 crop detail upscale as badge %}
+                        <img style="float:left" class="img-responsive" src="{{ badge.url }}">
+                    {% endfor %}
+                </div>
+             <hr>
+
             </div>
         </div>
     </div>
 {% endblock body %}
+
+{% block extra_body %}
+    <script src="{% static 'js/circles.min.js' %}"></script>
+    <script src="{% static 'js/Chart.min.js' %}"></script>
+    <script src="{% static 'js/Chart.Radar.js' %}"></script>
+    <script type="text/javascript">
+    var myCircle = Circles.create({
+          id:           'circles-1',
+          radius:       60,
+          value:        {{ object.experience }},
+          maxValue:     100,
+          width:        10,
+          text:         function(value){return value + '%';},
+          colors:       ['#cbeafc', '#00a1fd'],
+          duration:       600,
+          wrpClass:     'circles-wrp',
+          textClass:    'circles-text',
+          styleWrapper: true,
+          styleText:    true
+        });
+        var data = {
+            labels: ["Followers", "Following", "Issues", "Stars", "Forks"],
+            datasets: [
+                {
+                    label: "Skills",
+                    fillColor: "rgba(255,187,205,0.4)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: [
+                        {{ object.profile.followers }},
+                        {{ object.profile.following }},
+                        {{ object.profile.solver }},
+                        {{ object.profile.stars }},
+                        {{ object.profile.forks }}
+                    ]
+                }
+            ]
+        };
+        options = {
+            scaleShowLabels : false,
+            scaleLineColor: "rgba(0,0,0,.4)"
+
+        }
+        Chart.defaults.global.responsive = true;
+        var ctx = $("#myChart").get(0).getContext("2d");
+        var myRadarChart = new Chart(ctx).Radar(data, options);
+
+    </script>
+{% endblock extra_body %}

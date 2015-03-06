@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>{% block title %}{% trans 'Gamified Statistics for GitHub Code' %}{% endblock title %}</title>
+        <title>{% block title %}{% trans 'GitGaming - Your code, your game' %}{% endblock title %}</title>
 
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -24,6 +24,62 @@
     </head>
 
     <body>
+    <style>
+    #forkongithub a{
+        background:#f0ad4e;
+        color:#fff;
+        text-decoration:none;
+        font-family:arial,sans-serif;
+        text-align:center;
+        font-weight:400;
+        padding:5px 40px;
+        font-size:1.4rem;
+        line-height:2rem;
+        position:relative;
+        transition:0.5s;
+    }
+
+    #forkongithub a:hover{
+        background:#eea236;
+        color:#fff;
+    }
+    #forkongithub a::before,#forkongithub a::after{
+        content:"";
+        width:100%;
+        display:block;
+        position:absolute;
+        top:1px;
+        left:0;
+        height:1px;
+        background:#fff;
+    }#forkongithub a::after{
+             bottom:1px;top:auto;
+         }
+    @media screen and (min-width:800px){
+        #forkongithub{
+            position:fixed;
+            display:block;
+            top:0;
+            left:0;
+            width:200px;
+            overflow:hidden;
+            height:200px;
+            z-index:9999;
+        }
+        #forkongithub a{
+            width:200px;
+            position:absolute;
+            top:40px;
+            left:-60px;
+            transform:rotate(-45deg);
+            -webkit-transform:rotate(-45deg);
+            -ms-transform:rotate(-45deg);
+            -moz-transform:rotate(-45deg);
+            -o-transform:rotate(-45deg);
+            box-shadow:4px 4px 10px rgba(0,0,0,0.8);}
+    }</style>
+
+    <span id="forkongithub"><a href="/">Pre-Alpha 0.1</a></span>
         <nav style="margin-bottom: 0px" class="navbar navbar-default navbar-fixed-top" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -34,7 +90,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="/" style="padding-top:6px">
-                  <img style="height:40px;" src="{% static 'img/logo_text.jpg' %}"></a>
+                  <img style="height:40px;" src="{% static 'img/logo.png' %}"></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav navbar-right">
@@ -42,7 +98,7 @@
                      <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 
-                          <img style="width: 26px; display:inline-block; border: 1px solid #333333" src="{{ user.django_user.avatar }}" class="img img-responsive">
+                          <img style="width: 22px; display:inline-block; border: 1px solid #333333; border-radius:4px;" src="{{ user.django_user.avatar }}" class="img img-responsive">
                           {{ user }}
                           <span style="float: right; margin-top: 10px" class="caret"></span></a>
                       <ul class="dropdown-menu" role="menu">
