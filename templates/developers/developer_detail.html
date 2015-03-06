@@ -37,7 +37,8 @@
                 <h4> {% trans 'Experience' %}:</h4>
                 <div class="circle text-center" id="circles-1"></div>
                 <hr>
-
+                    <h3>{% trans 'Skills' %}</h3>
+                    <canvas id="myChart" width="200" height="200"></canvas>
                 <p>{{ object.profile.bio }}</p>
                 <p><a href="{{ object.profile.website }}">{% trans 'Personal Website' %}</a></p>
                 <h4> {{ object.repos }} {% trans 'repositories in the inventory' %} </h4>
@@ -45,19 +46,22 @@
 
 
              <div class="col-md-9">
-
-                <div class="col-sm-4">
-                    <h3>{% trans 'Skills' %}</h3>
-                    <canvas id="myChart" width="200" height="200"></canvas>
-                </div>
-                <div class="col-sm-8">
                 <h3>{% trans 'Last Badges' %}</h3>
                     {% for achievement in badges %}
-                        {% thumbnail achievement.badge.image 100x100 crop detail upscale as badge %}
-                        <img style="float:left" class="img-responsive" src="{{ badge.url }}">
+                        <div class="row">
+                            {% thumbnail achievement.badge.image 75x75 crop detail upscale as badge %}
+                            <div class="col-xs-2 col-sm-offset-2">
+                            <img class="img-responsive" src="{{ badge.url }}">
+                            </div>
+                            <div class="col-xs-8">
+                            {{ achievement.badge.description }}
+                            </div>
+
+                        </div>
+                        <hr>
                     {% endfor %}
-                </div>
-             <hr>
+
+
 
             </div>
         </div>
@@ -84,7 +88,7 @@
           styleText:    true
         });
         var data = {
-            labels: ["Followers", "Following", "Issues", "Stars", "Forks"],
+            labels: ["Leader", "Social", "Solver", "Famous", "Contributor"],
             datasets: [
                 {
                     label: "Skills",
