@@ -3,6 +3,7 @@ from GitGaming import settings
 from badges.req import req
 from stats.models import APIStats
 import time
+from GitGaming.SECRET import GITHUB2, GITHUB1
 
 
 def check(user, bytes, language, **kwargs):
@@ -14,12 +15,14 @@ def check(user, bytes, language, **kwargs):
     :param kwargs: Optional dictionary
     :return: True/False if badge is given or not
     """
-    # We won't use the PyGithub library for now, it has some issues with this request.
-    url = req['get_user_repos'].format(user)
+
+    url = req['get_user_repos'].format(user, GITHUB1, GITHUB2)
+    print url
     repos = requests.get(url)
 
     for repo in repos.json():
         url = repo[u'languages_url']
+        url += "?client_id={}&client_secret={}".format(GITHUB1, GITHUB2)
         languages = requests.get(url)
 
         if settings.DEBUG:

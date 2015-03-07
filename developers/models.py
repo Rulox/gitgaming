@@ -15,6 +15,7 @@ from badges.req import req
 import time
 import requests
 from image_cropping import ImageRatioField
+from GitGaming.SECRET import GITHUB1, GITHUB2
 
 # Create your models here.
 class Developer(models.Model):
@@ -42,12 +43,15 @@ class Developer(models.Model):
         """
             Update Developer Profile and basic information
         """
+
         profile, created = Profile.objects.get_or_create(dev_user=self)
 
         # User -------
-        url = req['get_user_info'].format(self.githubuser)
+        url = req['get_user_info'].format(self.githubuser, GITHUB1, GITHUB2)
         info = requests.get(url)
 
+        if settings.DEBUG:
+            print "Updating {}".format(profile)
 
         if not info.from_cache:
             now = time.strftime('%Y-%m-%d')
@@ -56,13 +60,15 @@ class Developer(models.Model):
             api.save()
 
         info = info.json()
+
+
         profile.followers = info[u'followers']
         profile.following = info[u'following']
         self.repos = info[u'public_repos']
         self.save()
 
         # Repositories
-        url = req['get_user_repos'].format(self.githubuser)
+        url = req['get_user_repos'].format(self.githubuser, GITHUB1, GITHUB2)
         repos = requests.get(url)
 
         if not repos.from_cache:

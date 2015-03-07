@@ -11,8 +11,8 @@ logger = logging.getLogger("gitgaming_worker")
 def update_developer(pk):
     try:
         developer = Developer.objects.get(pk=pk)
-        developer.check_badges()
         developer.update_profile()
+        developer.check_badges()
     except ObjectDoesNotExist:
         logger.error("Developer con pk {pk} no existe".format(pk=pk))
         return -1

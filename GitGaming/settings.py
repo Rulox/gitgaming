@@ -13,7 +13,7 @@ import os
 from easy_thumbnails.conf import Settings as thumbnail_settings
 import requests_cache
 
-requests_cache.install_cache('test_cache', backend='sqlite', expire_after=3000)  # Cache
+requests_cache.install_cache('test_cache', backend='sqlite', expire_after=6000)  # Cache
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -74,13 +74,36 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'crispy_forms',
     'zinnia_bootstrap',
-    'zinnia',
     'tagging',
     'mptt',
     'django.contrib.sites',
     'django_comments',
+    'zinnia',
+    'ckeditor',
+    'zinnia_ckeditor',
     'worker'
 )
+
+CKEDITOR_CONFIGS = {
+    'zinnia-content': {
+        'toolbar_Zinnia': [
+            ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'],
+            ['Undo', 'Redo'],
+            ['Scayt'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Image', 'Table', 'HorizontalRule', 'SpecialChar'],
+            ['Source'],
+            ['Maximize'],
+            '/',
+            ['Bold', 'Italic', 'Underline', 'Strike',
+             'Subscript', 'Superscript', '-', 'RemoveFormat'],
+            ['NumberedList', 'BulletedList', '-',
+             'Outdent', 'Indent', '-', 'Blockquote'],
+            ['Styles', 'Format'],
+        ],
+        'toolbar': 'Zinnia',
+    },
+}
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -127,6 +150,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "GitGaming/media")
 MEDIA_URL = "/media/"
+CKEDITOR_UPLOAD_PATH = MEDIA_URL
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),

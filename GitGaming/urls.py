@@ -22,7 +22,7 @@ urlpatterns = patterns('',
     #zinnia blog
     url(r'^weblog/', include('zinnia.urls', namespace='zinnia')),
     url(r'^comments/', include('django_comments.urls')),
-
+    url(r'^ckeditor/', include('ckeditor.urls')),
 )
 
 

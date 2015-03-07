@@ -1,10 +1,10 @@
 Git Gaming (GG)
 =========
-http://www.gitgaming.com
+##http://www.gitgaming.com
 
 If you want to receive news about the progress of this proyect, visit
 
-### https://gitgaming.wordpress.com/
+### http://www.gitgaming.com/weblog
 
 -
 Made for the **IX Open Source Contest** in http://www.concursosoftwarelibre.org/ will be continued after the contest. We want to create a big community of Developers/Game lovers in order to create stats and analyze data in a *"gamer"* and funny way.
@@ -23,6 +23,7 @@ Of course you can download and deploy GG in your system, add new badges and achi
 # Usage
 
     pip install -r requirements.txt
+    python manage.py migrate
     python manage.py runserver
 
 * You need to register your app in GitHub and follow steps to make Login with GitHub possible.
@@ -38,14 +39,11 @@ Of course you can download and deploy GG in your system, add new badges and achi
 
 -
 # Models
-TODO
+
 ### Developers
 ### Badges
 ### Achievements
 ### Stats
 
--
-# Create your own badge
-TODO
 
 

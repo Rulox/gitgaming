@@ -2,16 +2,22 @@
 {% load staticfiles i18n thumbnail %}
 
 
-{% block title %}{{ user }} - {% trans 'Profile' %} GitGaming{% endblock title %}
+{% block title %}{{ object }} - {% trans 'Profile' %} GitGaming{% endblock title %}
 
 {% block header %}
+
 {% endblock header %}
 
 {% block extra_head %}
     <link href="{% static 'css/profile.css' %}" rel="stylesheet">
-
+<style>
+    .alert-badge {
+        color: #222222;
+        background-color: #F5F5F5;
+        border-color: #CDCDCD;
+    }
+</style>
 {% endblock extra_head %}
-
 
 {% block body %}
     <div class="container profile-container">
@@ -22,6 +28,9 @@
         {% endif %}
 
         <div class="header" {% if object.profile.header %}style="background-image:url('{{header.url}}')"{% endif %}>
+
+           {% comment %}     <div class="bio-box"><p>{{ object.profile.bio }}</p></div> {% endcomment %}
+
             <div class="avatar-wrapper">
                <img style="height:175px" class="avatar img-responsive" src="{{ object.avatar }}">
             </div>
@@ -39,30 +48,31 @@
                 <hr>
                     <h3>{% trans 'Skills' %}</h3>
                     <canvas id="myChart" width="200" height="200"></canvas>
-                <p>{{ object.profile.bio }}</p>
                 <p><a href="{{ object.profile.website }}">{% trans 'Personal Website' %}</a></p>
                 <h4> {{ object.repos }} {% trans 'repositories in the inventory' %} </h4>
             </div>
 
-
-             <div class="col-md-9">
+            <div class="col-md-9">
+                <br>
+                <div class="alert alert-warning text-center" role="alert">
+                    {% blocktrans %}
+                        Because this is an Alpha Version, we are calculating your badges right know.
+                        If you want to see last changes, wait some minutes and reload the page. We are working to improve this.
+                        Sorry for any inconvenience!
+                    {% endblocktrans %}
+                </div>
                 <h3>{% trans 'Last Badges' %}</h3>
-                    {% for achievement in badges %}
-                        <div class="row">
-                            {% thumbnail achievement.badge.image 75x75 crop detail upscale as badge %}
-                            <div class="col-xs-2 col-sm-offset-2">
-                            <img class="img-responsive" src="{{ badge.url }}">
-                            </div>
-                            <div class="col-xs-8">
-                            {{ achievement.badge.description }}
-                            </div>
 
+                    {% for achievement in badges %}
+                        <div class="row ">
+                            <div class="animated fadeIn alert alert-badge col-sm-8 col-sm-offset-2 text-center">
+                                {% thumbnail achievement.badge.image 75x75 crop detail upscale as badge %}
+                                    <img class="img-responsive" style="float:left" src="{{ badge.url }}">
+                                    {{ achievement.badge.description }}
+                            </div>
                         </div>
                         <hr>
                     {% endfor %}
-
-
-
             </div>
         </div>
     </div>

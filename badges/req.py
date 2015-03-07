@@ -1,4 +1,4 @@
 req = {
-    'get_user_info' : 'https://api.github.com/users/{}',
-    'get_user_repos' : 'https://api.github.com/users/{}/repos',
+    'get_user_info' : 'https://api.github.com/users/{}?client_id={}&client_secret={}',
+    'get_user_repos' : 'https://api.github.com/users/{}/repos?client_id={}&client_secret={}',
 }

@@ -6,7 +6,7 @@ python-social-auth
 requests
 requests-cache
 gunicorn
-psycopg2
+#psycopg2
 django-image-cropping
 django-crispy-forms
 django-extensions
@@ -16,3 +16,4 @@ django-app-namespace-template-loader
 simplejson
 celery
 redis
+zinnia-wysiwyg-ckeditor
