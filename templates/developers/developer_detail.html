@@ -86,7 +86,7 @@
     var myCircle = Circles.create({
           id:           'circles-1',
           radius:       60,
-          value:        {{ object.experience }},
+          value:        parseFloat({{ object.experience }}),
           maxValue:     100,
           width:        10,
           text:         function(value){return value + '%';},

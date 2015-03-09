@@ -17,7 +17,6 @@ requests_cache.install_cache('test_cache', backend='sqlite', expire_after=6000) 
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -28,12 +27,11 @@ BROKER_URL = 'redis://localhost:6379/0'
 SECRET_KEY = 'changethis'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-if DEBUG:
-    SITE_ID = 1
+DEBUG = False
+SITE_ID = 1
 
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -200,7 +198,7 @@ TEMPLATE_LOADERS = [
 
 # Production STUFF
 if not DEBUG:
-    from settings_production import *
+    from settings_production import DATABASES, SECRET_KEY, STATIC_ROOT, ALLOWED_HOSTS
 else:
     DATABASES = {
     'default': {
