@@ -1,4 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from developers.models import Developer, Achievement, Profile
 
@@ -14,13 +15,16 @@ class DeveloperView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(DeveloperView, self).get_context_data(**kwargs)
-        developer = Developer.objects.get(githubuser=kwargs['user'])
-        context['object'] = developer
-        developer.update_data_async()
-        #developer.check_badges()
-        #developer.update_profile()
-        context['badges'] = Achievement.objects.filter(user=developer).order_by('-date')
-        return context
+        try:
+            developer = Developer.objects.get(githubuser=kwargs['user'])
+            context['object'] = developer
+            developer.update_data_async()
+            #developer.check_badges()
+            #developer.update_profile()
+            context['badges'] = Achievement.objects.filter(user=developer).order_by('-date')
+            return context
+        except ObjectDoesNotExist:
+            raise Http404()
 
 
 class DeveloperProfileEditView(UpdateView):
@@ -28,7 +32,7 @@ class DeveloperProfileEditView(UpdateView):
     success_url = '.'
     form_class = DeveloperProfileForm
 
-    def get_object(self):
+    def get_object(self, queryset=None):
         dev = Developer.objects.get(githubuser=self.request.user)
         return Profile.objects.get(dev_user=dev)
 

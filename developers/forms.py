@@ -12,7 +12,8 @@ class DeveloperProfileForm(ModelForm):
         achievements = Achievement.objects.filter(user=kwargs['instance'].dev_user)
         titles = [("", "No title")]
         for ach in achievements:
-            titles.append((ach.badge.title, ach.badge.title))
+            if not ach.badge.title ==  "":
+                titles.append((ach.badge.title, ach.badge.title))
 
         self.fields['title'] = forms.ChoiceField(required=False, label=_('Select your title'),
                                                   choices=titles)

@@ -180,7 +180,6 @@ def save_user(backend, user, response, *args, **kwargs):
             dev = Developer.objects.get(user=user)
             # If exists, we check for any new update in the repos. Check all the badges
             # FIXME In the future, this function will be called using Celery
-            dev.check_badges()
             return
         except ObjectDoesNotExist:
             if settings.DEBUG:

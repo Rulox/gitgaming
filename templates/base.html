@@ -78,7 +78,14 @@
             -moz-transform:rotate(-45deg);
             -o-transform:rotate(-45deg);
             box-shadow:4px 4px 10px rgba(0,0,0,0.8);}
-    }</style>
+    }
+        .selected {
+            border: 1px solid black !important;
+        }
+        .flag {
+            border: 1px solid white;
+        }
+    </style>
 
     <span id="forkongithub"><a href="/">Pre-Alpha 0.1</a></span>
         <nav style="margin-bottom: 0px" class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -118,7 +125,28 @@
                 <li><a href="/">FAQ</a></li>
                 <li><a href="/">{% trans 'About' %}</a></li>
                 <li><a href="/">{% trans 'Contact' %}</a></li>
+
                 <li><a href="{% url 'zinnia:entry_archive_index' %}">{% trans 'Blog' %}</a></li>
+                  <li><a>
+                    <form style="display: inline;" id="language_selector" action="{% url 'set_language' %}" method="POST">
+                      <script type="text/javascript">
+                          function graba(id, val) {
+                              id.elements["language"].value = val;
+                              return true;
+                          }
+                     </script>
+                      {% csrf_token %}
+
+                      <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}" />
+                      <input name="language" value="" type="hidden" />
+                      {% for code, language in LANGUAGES %}
+                      <input type="image" alt="{{language}}" src="{% static 'img/flags/' %}{{code}}.png"
+                          class="flag {% if LANGUAGE_CODE = code %}selected {% endif %}"
+                          name="flag" onclick="return graba(this.form, '{{code}}');" />
+                      {% endfor %}
+                  </form>
+                  </a>
+                </li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>

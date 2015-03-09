@@ -38,7 +38,7 @@
             <div class="form col-md-6 col-md-offset-3">
                 <h1>{{ object.dev_user }}</h1>
                 <h3>Edit your profile</h3>
-                <form action="" method="post" enctype="multipart/form-data">
+                <form id="dev_options" action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form|crispy }}
                     <input class="btn btn-warning" type="submit" value="{% trans 'Save Profile' %}" class="btn btn-default"/>

@@ -77,7 +77,7 @@ msgstr "Ir a mi perfil"
 #, fuzzy
 #| msgid "Go to my profile"
 msgid "Edit my profile"
-msgstr "Ir a mi perfil"
+msgstr "Editar mi perfil"
 
 #: .\templates\base.html:114
 msgid "SignUp/LogIn"
@@ -189,7 +189,7 @@ msgstr ""
 "\n"
 " Toda la información de tu perfil (logros, nivel, experiencia, títulos, etc) "
 "estarádisponible en tu perfil único. ¡Cambia tu imagen de perfil y "
-"compártelo con tus amigos\n"
+"compártelo con tus amigos!\n"
 "                        "
 
 #: .\templates\portal\index.html:76

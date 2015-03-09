@@ -1,4 +1,4 @@
-input, textarea {
+#dev_options input[type="text"], #dev_options textarea {
     padding: 9px;
     border: solid 1px #E5E5E5;
     outline: 0;
@@ -10,15 +10,15 @@ input, textarea {
 
     }
 
-textarea {
+#dev_options textarea {
     width: 400px;
     max-width: 400px;
     max-height: 150px;
     line-height: 150%;
     }
 
-input:hover, textarea:hover,
-input:focus, textarea:focus {
+#dev_options input:hover, #dev_options textarea:hover,
+#dev_options input:focus, #dev_options textarea:focus {
     border-color: #C9C9C9;
 
     }

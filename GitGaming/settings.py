@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from easy_thumbnails.conf import Settings as thumbnail_settings
+from GitGaming.settings_production import DEBUG as PROD_DEBUG
+from GitGaming.settings_production import TEMPLATE_DEBUG as PROD_TEMPLATE_DEBUG
 import requests_cache
 
 requests_cache.install_cache('test_cache', backend='sqlite', expire_after=6000)  # Cache
@@ -26,12 +28,12 @@ BROKER_URL = 'redis://localhost:6379/0'
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 SECRET_KEY = 'changethis'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+#from GitGaming.settings_production import DEBUG as PRODUCTION_DEBUG, TEMPLATE_DEBUG as PRODUCTION_TEMPLATE_DEBUG
+DEBUG = PROD_DEBUG
+TEMPLATE_DEBUG = PROD_TEMPLATE_DEBUG
 SITE_ID = 1
 
 
-TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -149,6 +151,10 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "GitGaming/media")
 MEDIA_URL = "/media/"
 CKEDITOR_UPLOAD_PATH = MEDIA_URL
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, "locale"),
+)
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
