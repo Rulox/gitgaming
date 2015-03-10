@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from views import DeveloperView, DeveloperProfileEditView
+from views import DeveloperView
 
 
 urlpatterns = patterns('',

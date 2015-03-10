@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
+        <!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
 
         <title>{% block title %}{% trans 'GitGaming - Your code, your game' %}{% endblock title %}</title>
 
@@ -15,10 +16,25 @@
 
         <link href="{% static 'css/landing-page.css' %}" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
         <script src="{% static 'js/jquery-2.1.1.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
+
         <link href="{% static 'css/gitgaming.css' %}" rel="stylesheet">
         <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+        <script src="{% static 'js/selectize.js' %}" type="text/javascript"></script>
+        <link href="{% static 'css/selectize.bootstrap3.css' %}" rel="stylesheet">
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-55438583-2', 'auto');
+          ga('send', 'pageview');
+
+        </script>
+
 
         {% block extra_head %}
         {% endblock extra_head %}
@@ -99,15 +115,36 @@
               </button>
               <a class="navbar-brand" href="/" style="padding-top:6px">
                   <img style="height:40px;" src="{% static 'img/logo.png' %}"></a>
+
             </div>
+              <div style="margin-top:12px" class="col-sm-3 col-md-3 pull-left hidden-sm hidden-xs">
+   				<div class="control-group">
+					<select id="select-repo" class="repositories" placeholder="{% trans 'User' %}"></select>
+				</div>
+                </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav navbar-right">
+              <!-- Search bar -->
+
+                  <!--
+                <form class="navbar-form" role="search" style="margin-top:14px">
+                <div class="input-group">
+                    <input id="searchterm"  autocomplete="off" type="text" class="form-control" placeholder="{% trans 'Search User' %}" name="srch-term" id="srch-term">
+                    <div class="input-group-btn">
+                        <a class="btn btn-default"><i class="glyphicon glyphicon-search"></i></a>
+                    </div>
+                </div>
+                </form>
+              </div>
+              <li  id="results_dropdown" class="dropdown">
+                <ul style="margin-top: 48px; width:300px" id="results" class="dropdown-menu" role="menu"></ul>
+              </li> -->
+              <!-- End Search Bar -->
+
                 {% if user and not user.is_anonymous %}
                      <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-
                           <img style="width: 22px; display:inline-block; border: 1px solid #333333; border-radius:4px;" src="{{ user.django_user.avatar }}" class="img img-responsive">
-                          {{ user }}
                           <span style="float: right; margin-top: 10px" class="caret"></span></a>
                       <ul class="dropdown-menu" role="menu">
                         <li><a href="{% url 'user_detail' user %}">{% trans 'Go to my profile' %}</a></li>
@@ -122,8 +159,7 @@
                 {% endif %}
 
                 <li><a href="/">{% trans 'Home' %}</a></li>
-                <li><a href="/">FAQ</a></li>
-                <li><a href="/">{% trans 'About' %}</a></li>
+                <li><a href="/">{% trans 'FAQ' %}</a></li>
                 <li><a href="/">{% trans 'Contact' %}</a></li>
 
                 <li><a href="{% url 'zinnia:entry_archive_index' %}">{% trans 'Blog' %}</a></li>
@@ -151,6 +187,38 @@
             </div><!--/.nav-collapse -->
           </div>
         </nav>
+<!---
+<script type="text/javascript">// <![CDATA[
+      $("#searchterm").on("change paste keyup", function(e){
+        $("#results_dropdown").removeClass('open');
+        var q = $("#searchterm").val();
+        if (q != "") {
+
+            $.getJSON("{% url 'get_users_ajax' %}", {
+              srsearch: q
+            },
+            function(data) {
+              if (data.length == 0)
+                return ""
+
+              $("#results_dropdown").removeClass('open');
+              $("#results_dropdown").addClass('open');
+
+              $("#results").empty();
+
+              $.each(data, function(i,item){
+                  $("#results").append("<li><a href='/'>PESCANDO</a></li>");
+                    $("#results").append("<li><a href='/user/" + encodeURIComponent(item.user) + "'>" + item.user + "</a>" + "</li>");
+              });
+                if ($("#searchterm").val() == "") {
+                    $("#results_dropdown").removeClass('open');
+                    $("#results").empty();
+                }
+            });
+         }
+      });
+
+// ]]></script>-->
 
             <!-- Header | Slider-->
         {% block header %}
@@ -160,19 +228,47 @@
     {% block body %}
     {% endblock body %}
 
+ <script>
+// <select id="select-repo"></select>
+$('#select-repo').selectize({
+    valueField: 'user',
+    labelField: 'user',
+    searchField: 'user',
+    options: [],
+    create: false,
+    render: {
+        option: function(item, escape) {
+            return '<div>' +
+                '<span class="title">' +
+                    '<span class="name"><i class="fa fa-user"></i> - ' + escape(item.user) + '</span>' +
+                '</span>' +
+            '</div>';
+        }
+    },
+    onChange: function(value) {
+        if (value != "")
+            window.location.href = "/user/" + value;
+    },
+    load: function(query, callback) {
+        if (!query.length) return callback();
+        $.ajax({
+            url: '{% url 'get_users_ajax' %}?srsearch=' + encodeURIComponent(query),
+            type: 'GET',
+            error: function() {
+                callback();
+            },
+            success: function(res) {
+                jsoned = JSON.parse(res)
+                callback(jsoned)
+            }
+        });
+    }
+});
+</script>
 
     {% block extra_body %}
     {% endblock extra_body %}
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    
-      ga('create', 'UA-55438583-2', 'auto');
-      ga('send', 'pageview');
-    
-    </script>
+
     </body>
 
 </html>

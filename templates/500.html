@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles i18n  %}
+
+
+{% block title %}500 - Error{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{%  block body %}
+<div class="container jumbotron" >
+    <div class="col-xs-12 text-center">
+        <h1>Error 500 </h1>
+        <p>{% trans 'Sorry, but the requested page is unavailable.' %}</p>
+        <p>{% trans 'Admin has been notified, so check back later.' %}</p>
+    </div>
+</div>
+{% endblock body %}

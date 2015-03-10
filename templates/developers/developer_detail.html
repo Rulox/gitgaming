@@ -5,7 +5,10 @@
 {% block title %}{{ object }} - {% trans 'Profile' %} GitGaming{% endblock title %}
 
 {% block header %}
-
+    <meta property="og:title" content="{{ object }} {% trans 'Profile' %} GitGaming " />
+    <meta property="og:description" content="{{ object }} {% trans 'profile in GitGaming. Check badges, level and much more!' %}" />
+    <meta property="og:site_name" content="GitGaming" />
+    <meta property="og:image" content="{{ object.avatar }}" />
 {% endblock header %}
 
 {% block extra_head %}
@@ -36,7 +39,7 @@
             </div>
         </div>
             <div class="col-md-12">
-                <div class="title row">
+                <div class="profile-title row">
                     <h2>{{ object.githubuser }} - {{ object.profile.title }}</h2>
                 </div>
             </div>
@@ -48,7 +51,9 @@
                 <hr>
                     <h3>{% trans 'Skills' %}</h3>
                     <canvas id="myChart" width="200" height="200"></canvas>
-                <p><a href="{{ object.profile.website }}">{% trans 'Personal Website' %}</a></p>
+                {% if object.profile.website %}
+                    <p><a href="{{ object.profile.website }}">{% trans 'Personal Website' %}</a></p>
+                {% endif %}
                 <h4> {{ object.repos }} {% trans 'repositories in the inventory' %} </h4>
             </div>
 

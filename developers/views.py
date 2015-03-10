@@ -1,5 +1,7 @@
+import re
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import Http404
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from developers.models import Developer, Achievement, Profile
 
@@ -7,6 +9,8 @@ from developers.models import Developer, Achievement, Profile
 from django.views.generic import TemplateView, FormView, UpdateView
 from developers.models import Developer
 from .forms import DeveloperProfileForm
+import simplejson
+
 
 class DeveloperView(TemplateView):
 
@@ -21,7 +25,7 @@ class DeveloperView(TemplateView):
             developer.update_data_async()
             #developer.check_badges()
             #developer.update_profile()
-            context['badges'] = Achievement.objects.filter(user=developer).order_by('-date')
+            context['badges'] = Achievement.objects.filter(user=developer).order_by('date')
             return context
         except ObjectDoesNotExist:
             raise Http404()
@@ -39,5 +43,21 @@ class DeveloperProfileEditView(UpdateView):
     #TODO def form valid
 
 
-
+def get_users(request):
+    """
+    Returns a JSON Object with users. It is used for
+    realtime search in Navbar.
+    :param request: POST Request with user string
+    :return: JSON with all the users
+    """
+    if request.is_ajax():
+        search = request.GET['srsearch']
+        regex = re.escape(search)
+        print regex
+        print search
+        devs = Developer.objects.filter(githubuser__contains=regex)
+        response = [{'user': x.githubuser} for x in devs]
+        return HttpResponse(simplejson.dumps(response))
+    else:
+        return HttpResponseRedirect(reverse('home'))
 

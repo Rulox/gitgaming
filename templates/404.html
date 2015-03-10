@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load staticfiles i18n  %}
+
+
+{% block title %}404 - Not found{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{%  block body %}
+    <div class="container jumbotron">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+               <h1>Wooops! Error 404.</h1>
+                <a href={% url 'home' %}>{% trans 'Go home' %}</a>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

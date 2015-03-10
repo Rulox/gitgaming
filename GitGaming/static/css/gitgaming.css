@@ -1,10 +1,13 @@
 .navbar-default {
-    background: white !important;
+    background-color: white !important;
     border-bottom: 1px solid #269abc;
 }
 
 .navbar {
     height: 60px;
+}
+#navbar {
+    background-color: white;
 }
 .navbar-brand {
     padding-top: 10px !important;
