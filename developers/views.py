@@ -55,7 +55,7 @@ def get_users(request):
         regex = re.escape(search)
         print regex
         print search
-        devs = Developer.objects.filter(githubuser__contains=regex)
+        devs = Developer.objects.filter(githubuser__icontains=regex)
         response = [{'user': x.githubuser} for x in devs]
         return HttpResponse(simplejson.dumps(response))
     else:
