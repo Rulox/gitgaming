@@ -39,6 +39,7 @@ class Developer(models.Model):
     last_update = models.DateTimeField(auto_now=True)
     avatar = models.URLField(null=True, blank=True)
     badge = models.ManyToManyField(Badge, through='Achievement')
+    points = models.IntegerField(null=False, blank=False, default=100)
 
     def __unicode__(self):
         return self.githubuser
@@ -160,6 +161,9 @@ class Developer(models.Model):
             self.experience = (given_exp - 100)
         else:
             self.experience = given_exp
+
+        # Update points
+        self.points = (self.level * 100) + self.experience
         self.save()
 
     def check_badges(self):

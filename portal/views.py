@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from developers.models import Developer
+from badges.models import Badge
 from django.core.paginator import Paginator
 # Create your views here.
 
@@ -13,7 +14,11 @@ class RankingView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(RankingView, self).get_context_data(**kwargs)
-        devs = Developer.objects.all()
+        devs = Developer.objects.all().order_by('-points')
         context['developers'] = devs
 
         return context
+
+class BadgeListView(ListView):
+    model = Badge
+    template_name = 'portal/badge_listview.html'
