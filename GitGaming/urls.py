@@ -3,7 +3,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 import developers
 from django.shortcuts import render_to_response
-from portal.views import PortalView
+from portal.views import PortalView, RankingView, BadgeListView
 from developers.views import DeveloperProfileEditView
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
@@ -34,6 +34,8 @@ urlpatterns += i18n_patterns('',
     url(r'^get_users_ajax/$', "developers.views.get_users", name='get_users_ajax'),
     url(r'^user/', include('developers.urls')),
     url(r'^edit/$', login_required(DeveloperProfileEditView.as_view()), name='user_edit'),
+    url(r'^ranking$', RankingView.as_view(), name='ranking'),
+    url(r'^badges$', BadgeListView.as_view(), name='badge_list'),
     url(r'^$', PortalView.as_view(), name='home'),
 
 )

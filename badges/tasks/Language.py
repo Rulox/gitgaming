@@ -19,7 +19,7 @@ def check(user, bytes, language, **kwargs):
     url = req['get_user_repos'].format(user, GITHUB1, GITHUB2)
     print url
     repos = requests.get(url)
-
+    amount = {}
     for repo in repos.json():
         url = repo[u'languages_url']
         url += "?client_id={}&client_secret={}".format(GITHUB1, GITHUB2)
@@ -34,11 +34,14 @@ def check(user, bytes, language, **kwargs):
             api.inc_call()
             api.save()
 
-        amount = 0
-
         for lang, size in languages.json().iteritems():
+            try:
+                amount[lang]
+            except KeyError:
+                amount[lang] = 0
+
             if lang == language:
-                amount += size
-            if amount >= bytes:
+                amount[lang] += size
+            if amount[lang] >= bytes:
                 return True
     return False

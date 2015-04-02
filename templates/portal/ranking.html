@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load staticfiles i18n %}
+
+{% block extra_head %}
+    <meta property="og:title" content="GitGaming - All badges" />
+    <meta property="og:description" content="{% blocktrans %}You can earn all these badges in GitGaming. Earn badges with your public GitHub Repositories!{% endblocktrans %}" />
+    <meta property="og:url" content="http://www.gitgaming.com/" />
+    <meta property="og:site_name" content="GitGaming" />
+    <meta property="og:image" content="http://www.gitgaming.com{% static 'img/logo.png' %}" />
+{% endblock extra_head %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block body %}
+
+    <div class="container" style="margin-top: 80px">
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <img src="{% static 'img/logo_medium.png' %}">
+                    <h2 class="section-heading">{% trans 'General Ranking' %}</h2>
+                    <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td>{% trans 'Ranking' %}</td>
+                            <td>{% trans 'User' %}</td>
+                            <td>{% trans 'Level' %}</td>
+                            <td>{% trans 'Points' %}</td>
+                            <td>{% trans 'Profile' %}</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%  for developer in developers %}
+                            <tr>
+                                <td>#{{ forloop.counter }}</td>
+                                <td>{{ developer.githubuser }}
+                                    <img style="width: 22px; display:inline-block; border: 1px solid #333333; border-radius:4px;"
+                                         src="{{ developer.avatar }}&s=22" class="img img-responsive">
+                                </td>
+                                <td>{{ developer.level }}</td>
+                                <td>{{ developer.points }}</td>
+                                <td><a href="{% url 'user_detail' developer.user %}">{% trans 'View Profile' %}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
+
+{% endblock body %}
+
+{% block extra_body %}
+{% endblock extra_body %}
