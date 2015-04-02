@@ -20,6 +20,7 @@
         border-color: #CDCDCD;
     }
 </style>
+
 {% endblock extra_head %}
 
 {% block body %}
@@ -35,7 +36,7 @@
            {% comment %}     <div class="bio-box"><p>{{ object.profile.bio }}</p></div> {% endcomment %}
 
             <div class="avatar-wrapper">
-               <img style="height:175px" class="avatar img-responsive" src="{{ object.avatar }}">
+               <img style="height:175px" class="avatar img-responsive" src="{{ object.avatar }}&s=175">
             </div>
         </div>
             <div class="col-md-12">
@@ -50,6 +51,17 @@
                 <div class="circle text-center" id="circles-1"></div>
                 <hr>
                     <h3>{% trans 'Skills' %}</h3>
+                    <div>
+                        {% for skill in skills %}
+                            {{ skill.language }}
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="{{ skill.bytes }}"
+                               aria-valuemin="0" aria-valuemax="100" style="width: {{ skill.bytes }}%;">
+                            <span style="color:black">{{ skill.bytes }}%</span>
+                          </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                     <canvas id="myChart" width="200" height="200"></canvas>
                 {% if object.profile.website %}
                     <p><a href="{{ object.profile.website }}">{% trans 'Personal Website' %}</a></p>
@@ -84,10 +96,16 @@
 {% endblock body %}
 
 {% block extra_body %}
+
     <script src="{% static 'js/circles.min.js' %}"></script>
     <script src="{% static 'js/Chart.min.js' %}"></script>
     <script src="{% static 'js/Chart.Radar.js' %}"></script>
     <script type="text/javascript">
+    jQuery('.skillbar').each(function(){
+	jQuery(this).find('.skillbar-bar').animate({
+		width:jQuery(this).attr('data-percent')
+	},2000);
+    });
     var myCircle = Circles.create({
           id:           'circles-1',
           radius:       60,

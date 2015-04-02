@@ -81,7 +81,8 @@ INSTALLED_APPS = (
     'zinnia',
     'ckeditor',
     'zinnia_ckeditor',
-    'worker'
+    'worker',
+    'skills',
 )
 
 CKEDITOR_CONFIGS = {

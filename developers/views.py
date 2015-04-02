@@ -4,6 +4,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from developers.models import Developer, Achievement, Profile
+from skills.models import Skill
+
 
 # Create your views here.
 from django.views.generic import TemplateView, FormView, UpdateView
@@ -22,10 +24,25 @@ class DeveloperView(TemplateView):
         try:
             developer = Developer.objects.get(githubuser=kwargs['user'])
             context['object'] = developer
+            # Call celery task. It will be updating Database in background
             developer.update_data_async()
-            #developer.check_badges()
-            #developer.update_profile()
-            context['badges'] = Achievement.objects.filter(user=developer).order_by('date')
+
+            #Badges
+            context['badges'] = Achievement.objects.filter(user=developer).order_by('-date')
+
+            # Skills and percentages
+            skills = Skill.objects.filter(profile=developer.profile)
+            sorted_skills = sorted(skills, key=lambda s: s.bytes, reverse=True)
+            sorted_skills = sorted_skills[:5]
+            try:
+                s_max = sorted_skills[0].bytes
+            except:
+                s_max = 100
+
+            for skill in sorted_skills:
+                skill.bytes = format((float(skill.bytes) / float(s_max)) * 100, '.2f')
+
+            context['skills'] = sorted_skills
             return context
         except ObjectDoesNotExist:
             raise Http404()

@@ -11,11 +11,15 @@ from django.contrib.auth import get_user_model
 from badges.models import Badge
 from stats.models import APIStats, UserStats
 from badges.tasks import Language, Fidelity
-from badges.req import req
 import time
 import requests
 from image_cropping import ImageRatioField
 from GitGaming.SECRET import GITHUB1, GITHUB2
+from badges.req import req
+from stats.models import APIStats
+from skills.models import Skill
+
+
 
 # Create your models here.
 class Developer(models.Model):
@@ -91,6 +95,49 @@ class Developer(models.Model):
         profile.solver = solver
         profile.save()
 
+    def update_skills(self):
+        """
+            Update Developer skills. (language skills)
+        :return:
+        """
+        url = req['get_user_repos'].format(self.githubuser, GITHUB1, GITHUB2)
+
+        repos = requests.get(url)
+        lang_dict = {}
+
+        for repo in repos.json():
+            url = repo[u'languages_url']
+            url += "?client_id={}&client_secret={}".format(GITHUB1, GITHUB2)
+            languages = requests.get(url)
+
+            if settings.DEBUG:
+                print 'Skill Checking - From cache: {}'.format(languages.from_cache)
+
+            if not languages.from_cache:
+                now = time.strftime('%Y-%m-%d')
+                api, created = APIStats.objects.get_or_create(date=now)
+                api.inc_call()
+                api.save()
+
+            for lang, size in languages.json().iteritems():
+                try:
+                    lang_dict[lang]
+                except KeyError:
+                    lang_dict[lang] = 0
+
+                try:
+                    lang_dict[lang] += size
+                except:
+                    pass
+
+        # Update Skills. Note that only 5 skills wil be shown in the View
+        for lang, bytes in lang_dict.iteritems():
+            s, created = Skill.objects.get_or_create(profile=self.profile, language=lang)
+            s.language = lang
+            s.profile = self.profile
+            s.bytes = bytes
+
+            s.save()
 
     def grant_badge(self, badge):
         """
@@ -100,9 +147,20 @@ class Developer(models.Model):
         a.user = self
         a.badge = badge
         a.save()
-        self.experience += badge.experience
+
+        try:
+            self.experience
+        except:
+            self.experience = 0.0
+
+        given_exp = (float(self.experience) + float(badge.experience))
+
+        if given_exp > 100:
+            self.level += 1
+            self.experience = (given_exp - 100)
+        else:
+            self.experience = given_exp
         self.save()
-        # TODO Check experience and increase level if proceed
 
     def check_badges(self):
         """
@@ -129,7 +187,6 @@ class Developer(models.Model):
     def update_data_async(self):
         from worker.tasks import update_developer
         update_developer.s(self.pk).apply_async()
-
 
 
 class Achievement(models.Model):
