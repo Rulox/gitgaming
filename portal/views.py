@@ -8,6 +8,11 @@ from django.core.paginator import Paginator
 class PortalView(TemplateView):
     template_name = 'portal/index.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(PortalView, self).get_context_data(**kwargs)
+        context['last_badges'] = Badge.objects.all().order_by('-date')[:3]
+        return context
+
 
 class RankingView(TemplateView):
     template_name = 'portal/ranking.html'

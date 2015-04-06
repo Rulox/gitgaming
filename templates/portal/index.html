@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles i18n %}
+{% load staticfiles i18n thumbnail %}
 
 {% block extra_head %}
     <meta property="og:title" content="GitGaming - Your Code, Your Game" />
@@ -52,6 +52,7 @@
 {% endblock header %}
 
 {% block body %}
+
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -61,6 +62,27 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
     <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">{% trans 'Last Badges' %}</h2>
+                    <h3>{% blocktrans %}These are our 3 last badges. Can you get them? {% endblocktrans %}</h3>
+                 <table class="table ">
+
+                    <tbody>
+                        {%  for badge in last_badges %}
+                            <tr>
+
+                                <td>{{ badge.name }}</td>
+                                {% thumbnail badge.image 50x50 crop detail upscale as badge_image %}
+                                <td><img src="{{ badge_image.url }}"></td>
+                                <td>{{ badge.description }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">{% trans 'We love Open Source' %}</h2>
