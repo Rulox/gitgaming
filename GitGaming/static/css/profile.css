@@ -30,6 +30,7 @@ body {
 .avatar {
     border: 6px solid white;
     border-radius: 16px;
+    background-color: white;
 }
 
 .avatar-wrapper {

@@ -30,7 +30,6 @@
         {% if object.profile.header %}
             {% thumbnail object.profile.header 1170x300 box=object.profile.header_cropping crop detail upscale as header %}
         {% endif %}
-
         <div class="header" {% if object.profile.header %}style="background-image:url('{{header.url}}')"{% endif %}>
 
            {% comment %}     <div class="bio-box"><p>{{ object.profile.bio }}</p></div> {% endcomment %}

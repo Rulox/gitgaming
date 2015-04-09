@@ -25,14 +25,17 @@
 {% block body %}
     <div class="container profile-container">
         <div class="row">
+	{% comment %}
         {% if object.header %}
             {% thumbnail object.header 1170x300 box=object.header_cropping detail upscale as header %}
         {% endif %}
+ 	{% endcomment %}
         <div class="avatar-wrapper">
            <img style="height:175px;" class="avatar img-responsive" src="{{ object.dev_user.avatar }}">
         </div>
+	<!-- TODO: Cargar imagen via ajax? -->
         <div class="header" >
-            <img alt="crop img" id="crop" src="{% if object.header %}{{object.header.url}}{% endif %}">
+            <img alt="crop img" id="crop" src="">
         </div>
 
             <div class="form col-md-6 col-md-offset-3">
@@ -53,6 +56,7 @@
 {% block extra_body %}
     <script src="{% static 'js/jquery.guillotine.min.js' %}"></script>
     <script type="text/javascript">
+    $("#crop").attr("src", "{% if object.header %}{{object.header.url}}{% endif %}")
     var picture = $("#crop");
     var coordinates = [{{ object.header_cropping }}];
 
@@ -67,31 +71,54 @@
                 x: coordinates[0],
                 y: coordinates[1]
             },
-            onChange: function(data, action) { //TODO Validar el tamaño de la foto antes de ponerla
+            onChange: function(data, action) { 
                 $("#id_header_cropping").val(data.x + "," + data.y + "," +  (data.x + 1170) + "," + (data.y + 300));
             }
         });
 
     });
-
+/*
     function readURL(input) {
         if (input.files && input.files[0]) {
             $("#id_header_cropping").val("0,0,1170,300");
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                console.log("a")
                 $("#crop").attr('src', e.target.result);
-                console.log(picture.guillotine('getData'))
                 picture.guillotine('remove');
             }
 
             reader.readAsDataURL(input.files[0]);
         }
-    }
+    }*/
 
+var _URL = window.URL || window.webkitURL;
+$("#id_header").change(function (e) {
+    var file, img;
+    if ((file = this.files[0])) {
+	var files = this.files[0]
+        img = new Image();
+        img.onload = function () {
+	    if ((this.width > 1170) && (this.height > 300)) {
+		    $("#id_header_cropping").val("0,0,1170,300");
+		    var reader = new FileReader();
+
+		    reader.onload = function (e) {
+			$("#crop").attr('src', e.target.result);
+			picture.guillotine('remove');
+		    }
+
+		    reader.readAsDataURL(files);
+	    } else {
+	        alert("{% trans 'Image must be 1170x300 minimum' %}")
+		return;
+	    }
+        };
+        img.src = _URL.createObjectURL(file);
+    }
+});
     $("#id_header").change(function() {
-        readURL(this);
+        //readURL(this);
     });
 
 
