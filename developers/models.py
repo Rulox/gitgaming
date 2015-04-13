@@ -10,7 +10,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from badges.models import Badge
 from stats.models import APIStats, UserStats
-from badges.tasks import Language, Fidelity
+from badges.tasks import Language, Fidelity, Fork
 import time
 import requests
 from image_cropping import ImageRatioField
@@ -186,6 +186,11 @@ class Developer(models.Model):
                     b = badge.is_fidelity
                     f = Fidelity
                     if f.check(b.end_date):
+                        self.grant_badge(b)
+                if badge.is_fork:
+                    b = badge.is_fork
+                    f = Fork
+                    if f.check(self.githubuser, b.forks):
                         self.grant_badge(b)
 
     def update_data_async(self):

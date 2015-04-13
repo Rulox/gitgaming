@@ -84,6 +84,7 @@
                             <div class="animated fadeIn alert alert-badge col-sm-8 col-sm-offset-2 text-center">
                                 {% thumbnail achievement.badge.image 75x75 crop detail upscale as badge %}
                                     <img class="img-responsive" style="float:left" src="{{ badge.url }}">
+                                    <h4>{{ achievement.badge.name }}</h4>
                                     {{ achievement.badge.description }}
                             </div>
                         </div>

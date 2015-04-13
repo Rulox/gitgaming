@@ -44,6 +44,13 @@ class Badge(models.Model):
         except FidelityBadge.DoesNotExist:
             return False
 
+    @property
+    def is_fork(self):
+        try:
+            return self.forkbadge
+        except:
+            return False
+
 
 class FidelityBadge(Badge):
     """ Fidelity Badge
@@ -81,7 +88,7 @@ class ForkBadge(Badge):
 
         i.e. 'May the Fork be with you'
     """
-    forks = models.IntegerField(verbose_name='Number fo minium repos forked', blank=False, null=False)
+    forks = models.IntegerField(verbose_name='Number fo minimum repos forked', blank=False, null=False)
 
 
 class SuperStarBadge(Badge):
