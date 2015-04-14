@@ -51,6 +51,14 @@ class Badge(models.Model):
         except:
             return False
 
+    @property
+    def is_license(self):
+        try:
+            return self.licensebadge
+        except LicenseBadge.DoesNotExist:
+            return False
+
+
 
 class FidelityBadge(Badge):
     """ Fidelity Badge
@@ -100,3 +108,16 @@ class LevelBadge(Badge):
     """
 
     level = models.IntegerField(verbose_name='Level', blank=False, null=False)
+
+
+class LicenseBadge(Badge):
+    """ License Badge
+        It takes the license in a repo a evaluate it
+    """
+    nrepos = models.IntegerField(verbose_name='Number of repos for license', blank=False, null=False)
+    license = models.CharField(verbose_name='License. (ie: MIT, GPLv3, etc)', max_length=255, blank=False, null=False)
+
+    def __unicode__(self):
+        return "{} badge from {} license in {} repos".format(self.name, self.license, self.nrepos)
+
+
