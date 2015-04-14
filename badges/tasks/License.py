@@ -17,15 +17,19 @@ def check(user, license, nrepos, **kwargs):
     """
 
     url = req['get_user_repos'].format(user, GITHUB1, GITHUB2)
-    headers = {"Accept": "application/vnd.github.drax-preview+json"}
-    print url
+    headers = {'Accept': 'application/vnd.github.drax-preview+json'}
+
     amount = {}
     repos = requests.get(url, headers=headers)
     for repo in repos.json():
+
         try:
-            url = repo[u'license']
-            print json.dumps(url, sort_keys=True,
-                             indent=4, separators=(',', ': '))
+            url = req['get_one_repo'].format(repo[u'full_name'], GITHUB1, GITHUB2)
+            info = requests.get(url, headers=headers)
+            license = info.json()[u'license']
+            if settings.DEBUG:
+                print 'LICENCIA --------------------> {}'.format(license['name'])
+            # NOTA, la licencia esta en license['name']
         except:
             print 'dont exists'
 
