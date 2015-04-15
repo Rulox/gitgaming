@@ -4,9 +4,8 @@ from badges.req import req
 from stats.models import APIStats
 import time
 from GitGaming.SECRET import GITHUB2, GITHUB1
-import json
 
-def check(user, license, nrepos, **kwargs):
+def check(user,inLicense, nrepos, **kwargs):
     """
     Check LicenseBadge
     :param user:  Developer
@@ -27,9 +26,10 @@ def check(user, license, nrepos, **kwargs):
             url = req['get_one_repo'].format(repo[u'full_name'], GITHUB1, GITHUB2)
             info = requests.get(url, headers=headers)
             license = info.json()[u'license']
+            print type(license)
+            lic = license['key']
             if settings.DEBUG:
-                print 'LICENCIA --------------------> {}'.format(license['name'])
-            # NOTA, la licencia esta en license['name']
+                print 'LICENCIA -> {}'.format(license['name'])
         except:
             print 'dont exists'
 
@@ -42,5 +42,14 @@ def check(user, license, nrepos, **kwargs):
             api, created = APIStats.objects.get_or_create(date=now)
             api.inc_call()
             api.save()
-    #check the number of repos with license
-    #return False
+
+        try:
+            amount[lic]
+        except:
+            amount[lic] = 0
+
+        if lic == inLicense:
+            amount[lic] += 1
+        if amount[lic] >= nrepos:
+            return True
+    return False

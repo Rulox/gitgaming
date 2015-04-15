@@ -115,7 +115,9 @@ class LicenseBadge(Badge):
         It takes the license in a repo a evaluate it
     """
     nrepos = models.IntegerField(verbose_name='Number of repos for license', blank=False, null=False)
-    license = models.CharField(verbose_name='License. (ie: MIT, GPLv3, etc)', max_length=255, blank=False, null=False)
+    #For more info of licenses http://goo.gl/2w2wmi
+    license = models.CharField(verbose_name='License Key. (ie: MIT, GPLv3, etc) More in http://goo.gl/2w2wmi',
+                               max_length=255, blank=False, null=False)
 
     def __unicode__(self):
         return "{} badge from {} license in {} repos".format(self.name, self.license, self.nrepos)
