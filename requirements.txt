@@ -17,3 +17,4 @@ simplejson
 celery
 redis
 zinnia-wysiwyg-ckeditor
+django-modeltranslation

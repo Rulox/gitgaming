@@ -94,7 +94,9 @@
                           <li><a href="">{% trans 'FAQ' %}</a></li>
                       </ul>
                     </li>
-                <li><a href="/">{% trans 'Contact' %}</a></li>
+                {%  if user.is_superuser %}
+                    <li><a href="/admin">{% trans 'Admin' %}</a></li>
+                {% endif %}
 
                 <li><a href="{% url 'zinnia:entry_archive_index' %}">{% trans 'Blog' %}</a></li>
                   <li><a>

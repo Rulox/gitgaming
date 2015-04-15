@@ -17,3 +17,17 @@
     padding-top: 20px;
     height: 59px;
 }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+ }
+
+.flag {
+    border: 1px solid transparent;
+}
+
+.selected {
+    border: 1px solid black;
+}
+
+

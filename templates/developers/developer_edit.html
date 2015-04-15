@@ -35,12 +35,13 @@
         </div>
 	<!-- TODO: Cargar imagen via ajax? -->
         <div class="header" >
-            <img alt="crop img" id="crop" src="">
+            <img alt="crop img" id="crop" src="" style="display:none">
         </div>
 
             <div class="form col-md-6 col-md-offset-3">
                 <h1>{{ object.dev_user }}</h1>
                 <h3>Edit your profile</h3>
+                <p class="alert alert-danger">Header - {% trans 'Image must be 1170x300 minimum.' %}</p>
                 <form id="dev_options" action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form|crispy }}
@@ -121,7 +122,9 @@ $("#id_header").change(function (e) {
         //readURL(this);
     });
 
-
+    setInterval(function() {
+        $("#crop").css('display', 'inline');
+    }, 1000);
 
     </script>
 

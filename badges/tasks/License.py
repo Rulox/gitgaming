@@ -26,12 +26,12 @@ def check(user,inLicense, nrepos, **kwargs):
             url = req['get_one_repo'].format(repo[u'full_name'], GITHUB1, GITHUB2)
             info = requests.get(url, headers=headers)
             license = info.json()[u'license']
-            print type(license)
+
             lic = license['key']
             if settings.DEBUG:
                 print 'LICENCIA -> {}'.format(license['name'])
         except:
-            print 'dont exists'
+            pass
 
 
         if settings.DEBUG:

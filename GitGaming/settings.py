@@ -66,6 +66,8 @@ INSTALLED_APPS = (
     'developers',
     'badges',
     'stats',
+    'worker',
+    'skills',
     # Externas
     'django_extensions',
     'easy_thumbnails',
@@ -81,8 +83,7 @@ INSTALLED_APPS = (
     'zinnia',
     'ckeditor',
     'zinnia_ckeditor',
-    'worker',
-    'skills',
+    'modeltranslation',
 )
 
 CKEDITOR_CONFIGS = {
@@ -130,6 +131,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 from django.utils.translation import ugettext_lazy as _
+
+# LANGUAGE
 
 LANGUAGES = (
     ('es', _('Spanish')),

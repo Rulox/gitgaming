@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-07 17:00+0000\n"
+"POT-Creation-Date: 2015-04-15 19:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\GitGaming\settings.py:134
+#: .\GitGaming\settings.py:138
 msgid "Spanish"
 msgstr ""
 
-#: .\GitGaming\settings.py:135
+#: .\GitGaming\settings.py:139
 msgid "English"
 msgstr ""
 
@@ -36,16 +36,20 @@ msgstr ""
 msgid "Change your header image and crop it!"
 msgstr ""
 
-#: .\developers\forms.py:17
+#: .\developers\forms.py:18
 msgid "Select your title"
 msgstr ""
 
-#: .\developers\models.py:29
+#: .\developers\models.py:33
 msgid "GitHub User account"
 msgstr ""
 
-#: .\developers\models.py:30
+#: .\developers\models.py:34
 msgid "Current level"
+msgstr ""
+
+#: .\skills\models.py:23
+msgid "Total bytes in this language"
 msgstr ""
 
 #: .\stats\models.py:12 .\stats\models.py:30 .\stats\models.py:47
@@ -64,64 +68,99 @@ msgstr ""
 msgid "Number of repositories"
 msgstr ""
 
-#: .\templates\base.html:12
+#: .\templates\404.html:15
+msgid "Go home"
+msgstr ""
+
+#: .\templates\500.html:14
+msgid "Sorry, but the requested page is unavailable."
+msgstr ""
+
+#: .\templates\500.html:15
+msgid "Admin has been notified, so check back later."
+msgstr ""
+
+#: .\templates\base.html:13
 msgid "GitGaming - Your code, your game"
 msgstr ""
 
-#: .\templates\base.html:106
+#: .\templates\base.html:61
+msgid "Search User"
+msgstr ""
+
+#: .\templates\base.html:73
 msgid "Go to my profile"
 msgstr ""
 
-#: .\templates\base.html:107
+#: .\templates\base.html:74
 msgid "Edit my profile"
 msgstr ""
 
-#: .\templates\base.html:114
+#: .\templates\base.html:81
 msgid "SignUp/LogIn"
 msgstr ""
 
-#: .\templates\base.html:117
+#: .\templates\base.html:84
 msgid "Home"
 msgstr ""
 
-#: .\templates\base.html:119
-msgid "About"
+#: .\templates\base.html:90 .\templates\portal\ranking.html:27
+msgid "Ranking"
 msgstr ""
 
-#: .\templates\base.html:120
+#: .\templates\base.html:91
+msgid "All Badges"
+msgstr ""
+
+#: .\templates\base.html:93
 msgid "Contact"
 msgstr ""
 
-#: .\templates\base.html:121
+#: .\templates\base.html:94
+msgid "FAQ"
+msgstr ""
+
+#: .\templates\base.html:98
+msgid "Admin"
+msgstr ""
+
+#: .\templates\base.html:101
 msgid "Blog"
 msgstr ""
 
 #: .\templates\developers\developer_detail.html:5
+#: .\templates\developers\developer_detail.html:8
 #: .\templates\developers\developer_edit.html:5
+#: .\templates\portal\ranking.html:31
 msgid "Profile"
 msgstr ""
 
-#: .\templates\developers\developer_detail.html:46
+#: .\templates\developers\developer_detail.html:9
+msgid "profile in GitGaming. Check badges, level and much more!"
+msgstr ""
+
+#: .\templates\developers\developer_detail.html:49
+#: .\templates\portal\ranking.html:29
 msgid "Level"
 msgstr ""
 
-#: .\templates\developers\developer_detail.html:47
+#: .\templates\developers\developer_detail.html:50
 msgid "Experience"
 msgstr ""
 
-#: .\templates\developers\developer_detail.html:50
+#: .\templates\developers\developer_detail.html:53
 msgid "Skills"
 msgstr ""
 
-#: .\templates\developers\developer_detail.html:52
+#: .\templates\developers\developer_detail.html:67
 msgid "Personal Website"
 msgstr ""
 
-#: .\templates\developers\developer_detail.html:53
+#: .\templates\developers\developer_detail.html:69
 msgid "repositories in the inventory"
 msgstr ""
 
-#: .\templates\developers\developer_detail.html:59
+#: .\templates\developers\developer_detail.html:75
 msgid ""
 "\n"
 "                        Because this is an Alpha Version, we are calculating "
@@ -132,15 +171,40 @@ msgid ""
 "                    "
 msgstr ""
 
-#: .\templates\developers\developer_detail.html:65
+#: .\templates\developers\developer_detail.html:81
+#: .\templates\portal\index.html:67
 msgid "Last Badges"
 msgstr ""
 
-#: .\templates\developers\developer_edit.html:44
+#: .\templates\developers\developer_edit.html:48
 msgid "Save Profile"
 msgstr ""
 
-#: .\templates\portal\index.html:18
+#: .\templates\developers\developer_edit.html:114
+msgid "Image must be 1170x300 minimum"
+msgstr ""
+
+#: .\templates\portal\badge_listview.html:23
+msgid "All our badges"
+msgstr ""
+
+#: .\templates\portal\badge_listview.html:27
+msgid "Badge No"
+msgstr ""
+
+#: .\templates\portal\badge_listview.html:28
+msgid "Badge Name"
+msgstr ""
+
+#: .\templates\portal\badge_listview.html:29
+msgid "Badge"
+msgstr ""
+
+#: .\templates\portal\badge_listview.html:30
+msgid "Description"
+msgstr ""
+
+#: .\templates\portal\index.html:23
 msgid ""
 "\n"
 "                                Earn badges, level up, improve as developer, "
@@ -150,23 +214,27 @@ msgid ""
 "                            "
 msgstr ""
 
-#: .\templates\portal\index.html:27
+#: .\templates\portal\index.html:32
 msgid "My Profile"
 msgstr ""
 
-#: .\templates\portal\index.html:33
+#: .\templates\portal\index.html:38
 msgid "Start using GitGaming"
 msgstr ""
 
-#: .\templates\portal\index.html:53
+#: .\templates\portal\index.html:68
+msgid "These are our 3 last badges. Can you get them? "
+msgstr ""
+
+#: .\templates\portal\index.html:88
 msgid "We love Open Source"
 msgstr ""
 
-#: .\templates\portal\index.html:63
+#: .\templates\portal\index.html:100
 msgid "Custom Profile"
 msgstr ""
 
-#: .\templates\portal\index.html:65
+#: .\templates\portal\index.html:102
 msgid ""
 "\n"
 "                            All the information about your profile (badges, "
@@ -176,11 +244,11 @@ msgid ""
 "                        "
 msgstr ""
 
-#: .\templates\portal\index.html:76
+#: .\templates\portal\index.html:113
 msgid "Improve your coding"
 msgstr ""
 
-#: .\templates\portal\index.html:78
+#: .\templates\portal\index.html:115
 msgid ""
 "\n"
 "                            You will get better rewards if you have a clean "
@@ -190,17 +258,39 @@ msgid ""
 "                        "
 msgstr ""
 
-#: .\templates\portal\index.html:89
+#: .\templates\portal\index.html:126
 msgid "Be competitive"
 msgstr ""
 
-#: .\templates\portal\index.html:91
+#: .\templates\portal\index.html:128
 msgid ""
 "\n"
 "                            Keep improving while you try to be the best "
 "developer of GG. Compare your position in\n"
 "                            our ranking and stats.\n"
 "                        "
+msgstr ""
+
+#: .\templates\portal\ranking.html:6
+msgid ""
+"You can earn all these badges in GitGaming. Earn badges with your public "
+"GitHub Repositories!"
+msgstr ""
+
+#: .\templates\portal\ranking.html:23
+msgid "General Ranking"
+msgstr ""
+
+#: .\templates\portal\ranking.html:28
+msgid "User"
+msgstr ""
+
+#: .\templates\portal\ranking.html:30
+msgid "Points"
+msgstr ""
+
+#: .\templates\portal\ranking.html:44
+msgid "View Profile"
 msgstr ""
 
 #: .\templates\zinnia\_entry_detail_base.html:17

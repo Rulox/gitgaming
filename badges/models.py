@@ -4,8 +4,8 @@ import pkgutil
 
 
 # Create your models here.
-""" Deprecated
-modules = pkgutil.iter_modules(path=["badges/tasks"])
+""" This will be used in the Future.
+modules = pkgutil.iter_modules(path=["badges/special/tasks"])
 a = []
 for loader, mod_name, ispkg in modules:
     a.append(str(mod_name))
@@ -36,7 +36,6 @@ class Badge(models.Model):
         except LanguageBadge.DoesNotExist:
             return False
 
-
     @property
     def is_fidelity(self):
         try:
@@ -48,7 +47,7 @@ class Badge(models.Model):
     def is_fork(self):
         try:
             return self.forkbadge
-        except:
+        except ForkBadge.DoesNotExist:
             return False
 
     @property
@@ -57,7 +56,6 @@ class Badge(models.Model):
             return self.licensebadge
         except LicenseBadge.DoesNotExist:
             return False
-
 
 
 class FidelityBadge(Badge):
@@ -102,6 +100,7 @@ class ForkBadge(Badge):
 class SuperStarBadge(Badge):
     pass
 
+
 class LevelBadge(Badge):
     """
         Badge given when you reach certain levels.
@@ -112,7 +111,8 @@ class LevelBadge(Badge):
 
 class LicenseBadge(Badge):
     """ License Badge
-        It takes the license in a repo a evaluate it
+        These kind of badges analyze differente licenses in repos. If the user has
+        'nrepos' of X license, badge is granted.
     """
     nrepos = models.IntegerField(verbose_name='Number of repos for license', blank=False, null=False)
     #For more info of licenses http://goo.gl/2w2wmi
