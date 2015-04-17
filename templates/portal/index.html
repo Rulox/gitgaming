@@ -11,7 +11,7 @@
 
 {% block header %}
 
-<div class="intro-header" style="background-image:url({% static 'img/slider/slider_1.jpg' %})">
+<div class="intro-header" style="background-image:url({% static 'img/slider/slider_2.jpg' %})">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -29,13 +29,13 @@
                         <ul class="list-inline intro-social-buttons">
                         {% if user and not user.is_anonymous %}
                               <li>
-                                <a href="{% url 'user_detail' user %}" class="btn btn-default btn-warning btn-lg"><i class="fa fa-user"></i> <span class="network-name">{% trans 'My Profile' %}</span></a>
+                                <a href="{% url 'user_detail' user %}" class="btn btn-default btn-default btn-lg"><i class="fa fa-user"></i> <span class="network-name">{% trans 'My Profile' %}</span></a>
 
                             </li>
 
                         {% else %}
                             <li>
-                                <a href="{% url 'social:begin' 'github' %}?next={{ request.path }}" class="btn btn-default btn-warning btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">{% trans 'Start using GitGaming' %}</span></a>
+                                <a href="{% url 'social:begin' 'github' %}?next={{ request.path }}" class="btn btn-default btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">{% trans 'Start using GitGaming' %}</span></a>
                             </li>
                         {% endif %}
                         </ul>
