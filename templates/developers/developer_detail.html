@@ -9,9 +9,11 @@
     <meta property="og:description" content="{{ object }} {% trans 'profile in GitGaming. Check badges, level and much more!' %}" />
     <meta property="og:site_name" content="GitGaming" />
     <meta property="og:image" content="{{ object.avatar }}" />
+
 {% endblock header %}
 
 {% block extra_head %}
+    <link href="{% static 'css/social-buttons.css' %}" rel="stylesheet">
     <link href="{% static 'css/profile.css' %}" rel="stylesheet">
 <style>
     .alert-badge {
@@ -40,7 +42,7 @@
         </div>
             <div class="col-md-12">
                 <div class="profile-title row">
-                    <h2>{{ object.githubuser }} - {{ object.profile.title }}</h2>
+                    <h2>{{ object.githubuser }} - {{ object.profile.title }} </h2>
                 </div>
             </div>
             <div class="col-md-3">
@@ -76,7 +78,32 @@
                         If you want to see last changes, wait some minutes and reload the page. We are working to improve this.
                         Sorry for any inconvenience!
                     {% endblocktrans %}
+
                 </div>
+            <h3>{% trans 'Share your profile!' %}</h3>
+             <div class="social-sharing is-clean text-center">
+
+                <!-- https://developers.facebook.com/docs/plugins/share-button/ -->
+                <a target="_blank" href="http://www.facebook.com/sharer.php?u=http://www.gitgaming.com{% url 'user_detail' object.githubuser %}" class="share-facebook">
+                  <span class="icon icon-facebook" aria-hidden="true"></span>
+                  <span class="share-title">Share</span>
+                </a>
+
+                <!-- https://dev.twitter.com/docs/intents -->
+                <a target="_blank" href="http://twitter.com/share?url=http://www.gitgaming.com{% url 'user_detail' object.githubuser %};via=gitgaming" class="share-twitter">
+                  <span class="icon icon-twitter" aria-hidden="true"></span>
+                  <span class="share-title">Tweet</span>
+                </a>
+
+
+                <!-- https://developers.google.com/+/web/share/ -->
+                <a target="_blank" href="http://plus.google.com/share?url=http://www.gitgaming.com{% url 'user_detail' object.githubuser %}" class="share-google">
+                  <!-- Cannot get Google+ share count with JS yet -->
+                  <span class="icon icon-google" aria-hidden="true"></span>
+                  <span class="share-title">+1</span>
+                </a>
+
+              </div>
                 <h3>{% trans 'Last Badges' %}</h3>
 
                     {% for achievement in badges %}
@@ -100,6 +127,7 @@
     <script src="{% static 'js/circles.min.js' %}"></script>
     <script src="{% static 'js/Chart.min.js' %}"></script>
     <script src="{% static 'js/Chart.Radar.js' %}"></script>
+    <script src="{% static 'js/social-buttons.js' %}"></script>
     <script type="text/javascript">
     jQuery('.skillbar').each(function(){
 	jQuery(this).find('.skillbar-bar').animate({
@@ -145,10 +173,13 @@
             scaleShowLabels : false,
             scaleLineColor: "rgba(0,0,0,.4)"
 
-        }
+        };
+
         Chart.defaults.global.responsive = true;
         var ctx = $("#myChart").get(0).getContext("2d");
         var myRadarChart = new Chart(ctx).Radar(data, options);
+
+        // Share buttons
 
     </script>
 {% endblock extra_body %}

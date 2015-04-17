@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-15 19:15+0100\n"
+"POT-Creation-Date: 2015-04-17 20:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,7 +97,7 @@ msgstr "Ir a mi perfil"
 #, fuzzy
 #| msgid "Go to my profile"
 msgid "Edit my profile"
-msgstr "Editar mi perfil"
+msgstr "Editar perfil"
 
 #: .\templates\base.html:81
 msgid "SignUp/LogIn"
@@ -136,7 +136,6 @@ msgstr "Blog"
 #: .\templates\developers\developer_detail.html:5
 #: .\templates\developers\developer_detail.html:8
 #: .\templates\developers\developer_edit.html:5
-#: .\templates\portal\ranking.html:31
 msgid "Profile"
 msgstr "Perfil"
 
@@ -144,28 +143,28 @@ msgstr "Perfil"
 msgid "profile in GitGaming. Check badges, level and much more!"
 msgstr "perfil en GitGaming. ¡Chequea logros, nivel y mucho más!"
 
-#: .\templates\developers\developer_detail.html:49
-#: .\templates\portal\ranking.html:29
+#: .\templates\developers\developer_detail.html:51
+#: .\templates\portal\ranking.html:30
 msgid "Level"
 msgstr "Nivel"
 
-#: .\templates\developers\developer_detail.html:50
+#: .\templates\developers\developer_detail.html:52
 msgid "Experience"
 msgstr "Experiencia"
 
-#: .\templates\developers\developer_detail.html:53
+#: .\templates\developers\developer_detail.html:55
 msgid "Skills"
 msgstr "Habilidades"
 
-#: .\templates\developers\developer_detail.html:67
+#: .\templates\developers\developer_detail.html:69
 msgid "Personal Website"
 msgstr "Sitio web"
 
-#: .\templates\developers\developer_detail.html:69
+#: .\templates\developers\developer_detail.html:71
 msgid "repositories in the inventory"
 msgstr "repositorios en el inventario"
 
-#: .\templates\developers\developer_detail.html:75
+#: .\templates\developers\developer_detail.html:77
 msgid ""
 "\n"
 "                        Because this is an Alpha Version, we are calculating "
@@ -181,17 +180,29 @@ msgstr ""
 " Si quieres visualizar los últimos cambios, espera unos minutos y recarga la "
 "página.Estamos trabajando para mejorar, disculpa las molestias"
 
-#: .\templates\developers\developer_detail.html:81
+#: .\templates\developers\developer_detail.html:84
+#, fuzzy
+#| msgid "Save Profile"
+msgid "Share your profile!"
+msgstr "¡Comparte!"
+
+#: .\templates\developers\developer_detail.html:108
 #: .\templates\portal\index.html:67
 msgid "Last Badges"
 msgstr "Últimos logros"
 
-#: .\templates\developers\developer_edit.html:48
+#: .\templates\developers\developer_edit.html:45
+msgid "Image must be 1170x300 minimum."
+msgstr "La imagen debe ser 1170x300p como mínimo."
+
+#: .\templates\developers\developer_edit.html:49
 msgid "Save Profile"
 msgstr "Guardar perfil"
 
-#: .\templates\developers\developer_edit.html:114
-msgid "Image must be 1170x300 minimum."
+#: .\templates\developers\developer_edit.html:115
+#, fuzzy
+#| msgid "Image must be 1170x300 minimum."
+msgid "Image must be 1170x300 minimum"
 msgstr "La imagen debe ser 1170x300p como mínimo."
 
 #: .\templates\portal\badge_listview.html:23
@@ -302,260 +313,31 @@ msgstr ""
 msgid ""
 "You can earn all these badges in GitGaming. Earn badges with your public "
 "GitHub Repositories!"
-msgstr ""
+msgstr "Puedes ganar todos estos logros en GitGaming. ¡Gana logros con tus repositorios de GitHub!"
 
 #: .\templates\portal\ranking.html:23
 msgid "General Ranking"
-msgstr ""
+msgstr "Ranking General"
 
 #: .\templates\portal\ranking.html:28
 msgid "User"
 msgstr "Usuario"
 
-#: .\templates\portal\ranking.html:30
+#: .\templates\portal\ranking.html:29
+msgid "Avatar"
+msgstr ""
+
+#: .\templates\portal\ranking.html:31
 msgid "Points"
 msgstr "Puntos"
 
-#: .\templates\portal\ranking.html:44
 #, fuzzy
-#| msgid "Save Profile"
-msgid "View Profile"
-msgstr "Guardar perfil"
+#~| msgid "Save Profile"
+#~ msgid "View Profile"
+#~ msgstr "Guardar perfil"
 
-#: .\templates\zinnia\_entry_detail_base.html:17
-msgid "Written by"
-msgstr "Escrito por"
-
-#: .\templates\zinnia\_entry_detail_base.html:21
-#: .\templates\zinnia\author_list.html:11
-#: .\templates\zinnia\tags\authors.html:6
-#, python-format
-msgid "Show all %(author)s's entries"
-msgstr ""
-
-#: .\templates\zinnia\_entry_detail_base.html:23
-#: .\templates\zinnia\entry_detail_base.html:85
-msgctxt "on date"
-msgid "on"
-msgstr ""
-
-#: .\templates\zinnia\_entry_detail_base.html:25
-msgid "Written on"
-msgstr ""
-
-#: .\templates\zinnia\_entry_detail_base.html:35
-#: .\templates\zinnia\tags\comments_recent.html:8
-#: .\templates\zinnia\tags\linkbacks_recent.html:8
-msgid "in"
-msgstr ""
-
-#: .\templates\zinnia\_entry_detail_base.html:38
-#: .\templates\zinnia\category_list.html:10
-#: .\templates\zinnia\tags\categories.html:6
-#, python-format
-msgid "Show all entries in %(category)s"
-msgstr ""
-
-#: .\templates\zinnia\_entry_detail_base.html:47
-msgid "Last update on"
-msgstr ""
-
-#: .\templates\zinnia\_entry_detail_base.html:79
-#, python-format
-msgid "%(percent)s%% of %(object)s still remains to read."
-msgstr ""
-
-#: .\templates\zinnia\_entry_detail_base.html:81
-msgid "Continue reading"
-msgstr ""
-
-#: .\templates\zinnia\_entry_detail_base.html:93
-msgid "Tags"
-msgstr ""
-
-#: .\templates\zinnia\_entry_detail_base.html:96
-#: .\templates\zinnia\tag_list.html:11
-#, python-format
-msgid "Show all entries tagged by %(tag)s"
-msgstr ""
-
-#: .\templates\zinnia\_entry_detail_base.html:99
-msgid "No tags"
-msgstr ""
-
-#: .\templates\zinnia\author_list.html:5
-msgid "Author list"
-msgstr ""
-
-#: .\templates\zinnia\author_list.html:14
-#: .\templates\zinnia\category_list.html:12 .\templates\zinnia\sitemap.html:56
-#: .\templates\zinnia\tag_list.html:13 .\templates\zinnia\tags\authors.html:9
-#: .\templates\zinnia\tags\categories.html:8
-#, python-format
-msgid "%(entry_count)s entry"
-msgid_plural "%(entry_count)s entries"
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\templates\zinnia\author_list.html:19
-#: .\templates\zinnia\tags\authors.html:15
-msgid "No authors yet."
-msgstr ""
-
-#: .\templates\zinnia\base.html:8 .\templates\zinnia\sitemap.html:52
-msgid "Categories"
-msgstr ""
-
-#: .\templates\zinnia\base.html:14
-msgid "Recent entries"
-msgstr ""
-
-#: .\templates\zinnia\category_list.html:5
-msgid "Category list"
-msgstr ""
-
-#: .\templates\zinnia\category_list.html:24 .\templates\zinnia\sitemap.html:61
-#: .\templates\zinnia\tags\categories.html:14
-msgid "No categories yet."
-msgstr ""
-
-#: .\templates\zinnia\entry_detail_base.html:11
-msgid "Related entries"
-msgstr ""
-
-#: .\templates\zinnia\entry_detail_base.html:58
-msgid "Pingbacks"
-msgstr ""
-
-#: .\templates\zinnia\entry_detail_base.html:74
-msgid "Trackbacks"
-msgstr ""
-
-#: .\templates\zinnia\entry_detail_base.html:91
-msgid "Direct link to this trackback"
-msgstr ""
-
-#: .\templates\zinnia\entry_detail_base.html:129
-#: .\templates\zinnia\entry_detail_base.html:131
-msgid "Edit the entry"
-msgstr ""
-
-#: .\templates\zinnia\entry_search.html:5
-msgid "Search results for"
-msgstr ""
-
-#: .\templates\zinnia\entry_search.html:13
-#, python-format
-msgid "%(entry_count)s entry found"
-msgid_plural "%(entry_count)s entries found"
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\templates\zinnia\entry_search.html:23
-msgid "Nothing found."
-msgstr ""
-
-#: .\templates\zinnia\sitemap.html:5 .\templates\zinnia\skeleton.html:57
-#: .\templates\zinnia\skeleton.html:58
-msgid "Sitemap"
-msgstr ""
-
-#: .\templates\zinnia\sitemap.html:8
-msgid "Entries per categories"
-msgstr ""
-
-#: .\templates\zinnia\sitemap.html:17 .\templates\zinnia\sitemap.html.py:39
-msgid "comment"
-msgstr ""
-
-#: .\templates\zinnia\sitemap.html:23 .\templates\zinnia\sitemap.html.py:45
-#: .\templates\zinnia\tags\entries_popular.html:13
-#: .\templates\zinnia\tags\entries_random.html:9
-#: .\templates\zinnia\tags\entries_recent.html:9
-msgid "No entries yet."
-msgstr ""
-
-#: .\templates\zinnia\sitemap.html:31
-msgid "All the entries"
-msgstr ""
-
-#: .\templates\zinnia\sitemap.html:68
-msgid "Monthly archives"
-msgstr ""
-
-#: .\templates\zinnia\skeleton.html:10
-msgid "Just another Zinnia weblog."
-msgstr ""
-
-#: .\templates\zinnia\skeleton.html:49
-msgid "Useful links"
-msgstr ""
-
-#: .\templates\zinnia\skeleton.html:52 .\templates\zinnia\skeleton.html:53
-msgid "Weblog index"
-msgstr ""
-
-#: .\templates\zinnia\skeleton.html:64
-#: .\templates\zinnia\tags\search_form.html:13
-msgid "Search"
-msgstr ""
-
-#: .\templates\zinnia\skeleton.html:76
-#, python-format
-msgid ""
-"Powered by <a href=\"http://www.djangoproject.com\">Django</a> and <a href="
-"\"https://github.com/Fantomas42/django-blog-zinnia\">Zinnia %(ZINNIA_VERSION)"
-"s</a>."
-msgstr ""
-
-#: .\templates\zinnia\tag_list.html:5
-msgid "Tag list"
-msgstr ""
-
-#: .\templates\zinnia\tag_list.html:18
-msgid "No tags yet."
-msgstr ""
-
-#: .\templates\zinnia\tags\comments_recent.html:7
-msgid "Comment on"
-msgstr ""
-
-#: .\templates\zinnia\tags\comments_recent.html:15
-msgid "No comments yet."
-msgstr ""
-
-#: .\templates\zinnia\tags\entries_similar.html:9
-msgid "No similar entries."
-msgstr ""
-
-#: .\templates\zinnia\tags\linkbacks_recent.html:7
-msgid "Linkback on"
-msgstr ""
-
-#: .\templates\zinnia\tags\linkbacks_recent.html:14
-msgid "No linkbacks yet."
-msgstr ""
-
-#: .\templates\zinnia\tags\pagination.html:7
-msgid "More recent entries"
-msgstr ""
-
-#: .\templates\zinnia\tags\pagination.html:17
-#: .\templates\zinnia\tags\pagination.html:32
-#: .\templates\zinnia\tags\pagination.html:48
-msgid "Entries page"
-msgstr ""
-
-#: .\templates\zinnia\tags\pagination.html:57
-msgid "More old entries"
-msgstr ""
-
-#: .\templates\zinnia\tags\search_form.html:7
-msgid ""
-"You can use - to exclude words or phrases, &quot;double quotes&quot; for "
-"exact phrases and the AND/OR boolean operators combined with parenthesis for "
-"complex queries."
-msgstr ""
+#~ msgid "Written by"
+#~ msgstr "Escrito por"
 
 #~ msgid "About"
 #~ msgstr "Sobre nosotros"
