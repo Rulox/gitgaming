@@ -123,3 +123,18 @@ class LicenseBadge(Badge):
         return "{} badge from {} license in {} repos".format(self.name, self.license, self.nrepos)
 
 
+
+
+# Manual Badges
+
+class CustomBadge(Badge):
+    """ Custom Badge
+        These kind of badge is granted if the Developer knows the 'code' to get it
+        before the expiration date!
+
+        i.e. 'Assist to GitGaming presentation'
+        i.e. 'Be a participant of the CUSL Contest'
+    """
+
+    code = models.CharField(blank=False, null=False, unique=True, max_length=255)
+    expiration_date = models.DateTimeField(blank=False, null=False)

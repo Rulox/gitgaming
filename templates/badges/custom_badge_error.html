@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load staticfiles i18n thumbnail %}
+
+{% block extra_head %}
+    <meta property="og:title" content="GitGaming - Your Code, Your Game" />
+    <meta property="og:description" content="" />
+    <meta property="og:url" content="http://www.gitgaming.com/" />
+    <meta property="og:site_name" content="GitGaming" />
+    <meta property="og:image" content="{% static 'img/logo.png' %}" />
+{% endblock extra_head %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block body %}
+
+    <div class="container" >
+        <div class="row">
+            <div class="col-sm-12 text-center" style="margin-top: 80px">
+                <div class="alert alert-warning">{{ msg }}</div>
+                {% if user and not user.is_anonymous %}
+                    <a href="{% url 'user_detail' user %}" class="btn btn-default btn-default btn-lg"><i class="fa fa-user"></i> <span class="network-name">{% trans 'My Profile' %}</span></a>
+                {% endif %}
+                    <a href="{% url 'home' %}" class="btn btn-default btn-default btn-lg"><i class="fa fa-home"></i> <span class="network-name">{% trans 'Home' %}</span></a>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block extra_body %}
+{% endblock extra_body %}

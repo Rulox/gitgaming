@@ -46,7 +46,9 @@
                 </div>
             </div>
             <div class="col-md-3">
-
+                <h4>{%  trans 'Request Special Badge' %}</h4>
+                <input placeholder="Badge Code" type="text" id="code">
+                <a id="request" class="btn btn-success" href="#">{% trans 'Request!' %}</a>
                 <h4> {% trans 'Level' %}: {{ object.level }}</h4>
                 <h4> {% trans 'Experience' %}:</h4>
                 <div class="circle text-center" id="circles-1"></div>
@@ -179,7 +181,9 @@
         var ctx = $("#myChart").get(0).getContext("2d");
         var myRadarChart = new Chart(ctx).Radar(data, options);
 
-        // Share buttons
+        $("#code").keyup(function() {
+           $("#request").attr('href', '/grant_badge/' + $(this).val());
+        });
 
     </script>
 {% endblock extra_body %}

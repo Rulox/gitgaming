@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-17 20:09+0100\n"
+"POT-Creation-Date: 2015-04-20 13:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,6 +32,22 @@ msgstr "Título que otorga la badge"
 #: .\badges\models.py:26
 msgid "Experience gained with this badge"
 msgstr "Experiencia ganada con la badge"
+
+#: .\badges\views.py:17
+msgid "Yoy already have this badge!"
+msgstr "¡Ya tienes este logro!"
+
+#: .\badges\views.py:24
+msgid "You have earned a new badge!"
+msgstr "¡Has ganado un nuevo Logro!"
+
+#: .\badges\views.py:28
+msgid "This badge is no longer available."
+msgstr "Este Logro ya no está disponible."
+
+#: .\badges\views.py:32
+msgid "There is no badge with this code. We are sorry!"
+msgstr "No existe ningún logro con este código. ¡Lo sentimos!"
 
 #: .\developers\forms.py:7
 msgid "Change your header image and crop it!"
@@ -81,6 +97,15 @@ msgstr "Lo sentimos, la página solicitada no funciona."
 msgid "Admin has been notified, so check back later."
 msgstr "El administrador ha sido notificado, prueba más tarde."
 
+#: .\templates\badges\custom_badge_error.html:23
+#: .\templates\portal\index.html:32
+msgid "My Profile"
+msgstr "Mi perfil"
+
+#: .\templates\badges\custom_badge_error.html:25 .\templates\base.html:84
+msgid "Home"
+msgstr "Principal"
+
 #: .\templates\base.html:13
 msgid "GitGaming - Your code, your game"
 msgstr "GitGaming - Your code, your game"
@@ -102,10 +127,6 @@ msgstr "Editar perfil"
 #: .\templates\base.html:81
 msgid "SignUp/LogIn"
 msgstr "Registro/LogIn"
-
-#: .\templates\base.html:84
-msgid "Home"
-msgstr "Principal"
 
 #: .\templates\base.html:90 .\templates\portal\ranking.html:27
 msgid "Ranking"
@@ -143,28 +164,36 @@ msgstr "Perfil"
 msgid "profile in GitGaming. Check badges, level and much more!"
 msgstr "perfil en GitGaming. ¡Chequea logros, nivel y mucho más!"
 
-#: .\templates\developers\developer_detail.html:51
+#: .\templates\developers\developer_detail.html:50
+msgid "Request Special Badge"
+msgstr ""
+
+#: .\templates\developers\developer_detail.html:52
+msgid "Request!"
+msgstr ""
+
+#: .\templates\developers\developer_detail.html:53
 #: .\templates\portal\ranking.html:30
 msgid "Level"
 msgstr "Nivel"
 
-#: .\templates\developers\developer_detail.html:52
+#: .\templates\developers\developer_detail.html:54
 msgid "Experience"
 msgstr "Experiencia"
 
-#: .\templates\developers\developer_detail.html:55
+#: .\templates\developers\developer_detail.html:57
 msgid "Skills"
 msgstr "Habilidades"
 
-#: .\templates\developers\developer_detail.html:69
+#: .\templates\developers\developer_detail.html:71
 msgid "Personal Website"
 msgstr "Sitio web"
 
-#: .\templates\developers\developer_detail.html:71
+#: .\templates\developers\developer_detail.html:73
 msgid "repositories in the inventory"
 msgstr "repositorios en el inventario"
 
-#: .\templates\developers\developer_detail.html:77
+#: .\templates\developers\developer_detail.html:79
 msgid ""
 "\n"
 "                        Because this is an Alpha Version, we are calculating "
@@ -180,14 +209,14 @@ msgstr ""
 " Si quieres visualizar los últimos cambios, espera unos minutos y recarga la "
 "página.Estamos trabajando para mejorar, disculpa las molestias"
 
-#: .\templates\developers\developer_detail.html:84
+#: .\templates\developers\developer_detail.html:86
 #, fuzzy
 #| msgid "Save Profile"
 msgid "Share your profile!"
 msgstr "¡Comparte!"
 
-#: .\templates\developers\developer_detail.html:108
-#: .\templates\portal\index.html:67
+#: .\templates\developers\developer_detail.html:110
+#: .\templates\portal\index.html:68
 msgid "Last Badges"
 msgstr "Últimos logros"
 
@@ -240,27 +269,23 @@ msgstr ""
 "Gana badges, sube de nivel, mejora como desarrollador, sé más productivo..."
 "<br> Estadísticas gamificadas para tus repositorios públicos de GitHub"
 
-#: .\templates\portal\index.html:32
-msgid "My Profile"
-msgstr "Mi perfil"
-
 #: .\templates\portal\index.html:38
 msgid "Start using GitGaming"
 msgstr "Empieza a usar GitGaming"
 
-#: .\templates\portal\index.html:68
+#: .\templates\portal\index.html:69
 msgid "These are our 3 last badges. Can you get them? "
 msgstr "Estos son los últimos 3 logros añadidos. ¿Puedes conseguirlos?"
 
-#: .\templates\portal\index.html:88
+#: .\templates\portal\index.html:89
 msgid "We love Open Source"
 msgstr ""
 
-#: .\templates\portal\index.html:100
+#: .\templates\portal\index.html:103
 msgid "Custom Profile"
 msgstr "Perfil personalizado"
 
-#: .\templates\portal\index.html:102
+#: .\templates\portal\index.html:105
 msgid ""
 "\n"
 "                            All the information about your profile (badges, "
@@ -275,11 +300,11 @@ msgstr ""
 "compártelo con tus amigos!\n"
 "                        "
 
-#: .\templates\portal\index.html:113
+#: .\templates\portal\index.html:116
 msgid "Improve your coding"
 msgstr "Mejora tu código"
 
-#: .\templates\portal\index.html:115
+#: .\templates\portal\index.html:118
 msgid ""
 "\n"
 "                            You will get better rewards if you have a clean "
@@ -293,11 +318,11 @@ msgstr ""
 "contribuiren repositorios de otros desarrolladores servirá para conseguir "
 "mejores logros y más experiencia"
 
-#: .\templates\portal\index.html:126
+#: .\templates\portal\index.html:129
 msgid "Be competitive"
 msgstr "Sé competitivo"
 
-#: .\templates\portal\index.html:128
+#: .\templates\portal\index.html:131
 msgid ""
 "\n"
 "                            Keep improving while you try to be the best "
@@ -313,7 +338,9 @@ msgstr ""
 msgid ""
 "You can earn all these badges in GitGaming. Earn badges with your public "
 "GitHub Repositories!"
-msgstr "Puedes ganar todos estos logros en GitGaming. ¡Gana logros con tus repositorios de GitHub!"
+msgstr ""
+"Puedes ganar todos estos logros en GitGaming. ¡Gana logros con tus "
+"repositorios de GitHub!"
 
 #: .\templates\portal\ranking.html:23
 msgid "General Ranking"

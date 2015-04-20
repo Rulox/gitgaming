@@ -32,6 +32,7 @@ urlpatterns = patterns('',
 
 urlpatterns += i18n_patterns('',
     url(r'^get_users_ajax/$', "developers.views.get_users", name='get_users_ajax'),
+    url(r'^grant_badge/(?P<code>.+)/$', "badges.views.grant_custom_badge", name='grant_custom_badge'),
     url(r'^user/', include('developers.urls')),
     url(r'^edit/$', login_required(DeveloperProfileEditView.as_view()), name='user_edit'),
     url(r'^ranking$', RankingView.as_view(), name='ranking'),
