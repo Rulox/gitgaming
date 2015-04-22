@@ -9,6 +9,7 @@ SECRET.py
 media
 virtualenv
 test_cache.sqlite
+collected_static
 
 # C extensions
 *.so
