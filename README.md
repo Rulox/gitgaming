@@ -2,7 +2,9 @@ Git Gaming (GG)
 =========
 ##http://www.gitgaming.com
 
-If you want to receive news about the progress of this proyect, visit
+![alt tag](http://upload.wikimedia.org/wikipedia/commons/thumb/0/06/AGPLv3_Logo.svg/200px-AGPLv3_Logo.svg.png)
+
+If you want to receive news about the progress of this proyect (in Spanish), visit  
 
 ### http://www.gitgaming.com/weblog
 
