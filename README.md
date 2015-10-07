@@ -2,11 +2,10 @@ Git Gaming (GG)
 =========
 ##http://www.gitgaming.com
 
+### GitGaming is no longer being developed (for now). If you want information, comments or suggestions, feel free to open an issue.
+
 ![alt tag](http://upload.wikimedia.org/wikipedia/commons/thumb/0/06/AGPLv3_Logo.svg/200px-AGPLv3_Logo.svg.png)
 
-If you want to receive news about the progress of this proyect (in Spanish), visit  
-
-### http://www.gitgaming.com/weblog
 
 -
 Made for the **IX Free Software Contest** in http://www.concursosoftwarelibre.org/ will be continued after the contest. We want to create a big community of Developers/Game lovers in order to create stats and analyze data in a *"gamer"* and funny way.
