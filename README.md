@@ -2,7 +2,7 @@ Git Gaming (GG)
 =========
 ##http://www.gitgaming.com
 
-### GitGaming is no longer being developed (for now). If you want information, comments or suggestions, feel free to open an issue.
+### GitGaming is no longer being developed (for now). If you want information, or you have some comments or suggestions, feel free to open an issue.
 
 ![alt tag](http://upload.wikimedia.org/wikipedia/commons/thumb/0/06/AGPLv3_Logo.svg/200px-AGPLv3_Logo.svg.png)
 
